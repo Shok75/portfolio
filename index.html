@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">Portfolio</span>
+            </a>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="#home" class="nav-link active">Accueil</a>
+                <a href="#about" class="nav-link">À propos</a>
+                <a href="#projects" class="nav-link">Projets</a>
+                <a href="#skills" class="nav-link">Compétences</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <span class="badge">👋 Bienvenue sur mon portfolio</span>
+                    <h1 class="hero-title">
+                        Je suis etudiant<span class="highlight"> en BUT</span><br>
+                         INFORMATIQUE
+                    </h1>
+                    <p class="hero-text">
+                        Étudiant en <strong>BUT Informatique</strong>, je suis à la recherche d'un stage.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            Découvrir mes projets
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                        <a href="#contact" class="btn btn-outline">Me contacter</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="floating-card card-1">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                        <span>Code</span>
+                    </div>
+                    <div class="floating-card card-2">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                        <span>  Data  </span>
+                    </div>
+                    <div class="floating-card card-3">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        </svg>
+                        <span>Backend</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Qui suis-je ?</span>
+                <h2 class="section-title">À propos de moi</h2>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text">
+                    <p class="lead">
+                        Je suis étudiant en <strong>2ᵉ année de BUT Informatique</strong>, parcours Réalisation d’applications.
+                        Je m’oriente vers le développement d’applications web et logicielles, avec un intérêt particulier pour le backend et les bases de données.
+                    </p>
+                    <p>
+                        À travers mes projets académiques et personnels, je développe des solutions fonctionnelles, structurées et adaptées aux besoins utilisateurs.
+                    </p>
+                    <p>
+                        Je suis actuellement à la recherche d’un stage de 2 mois ou plus en fin d’année afin de mettre en pratique mes compétences et
+                        continuer à progresser en environnement professionnel.
+                    </p>
+                    
+                    <div class="skills-preview">
+                        <div class="skill-badge">
+                            <span class="emoji">💻</span>
+                            <span>Développement Web</span>
+                        </div>
+                        <div class="skill-badge">
+                            <span class="emoji">🎮</span>
+                            <span>Jeux Vidéo</span>
+                        </div>
+                        <div class="skill-badge">
+                            <span class="emoji">🗄️</span>
+                            <span>Bases de données</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <h3>3+</h3>
+                            <p>Projets réalisés</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-box">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <h3>8+</h3>
+                            <p>Technologies</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-box">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <h3>2+</h3>
+                            <p>Années d'expérience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Mes réalisations</span>
+                <h2 class="section-title">Projets en vedette</h2>
+            </div>
+
+            <div class="projects-grid">
+                <article class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="project-number">01</div>
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                            <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                        </svg>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Game Development</div>
+                        <h3 class="project-title">Demon Realm</h3>
+                        <p class="project-description">
+                            Jeu d'aventure 2D développé en Java avec JavaFX.
+                            Système de combat, inventaire et monde explorable.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Java</span>
+                            <span class="tag">JavaFX</span>
+                        </div>
+                        <div class="project-footer">
+                            <a href="demon-realm.html" class="btn btn-text">
+                                Voir le projet
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                            <a href="https://github.com/Shok75/DemonRealm" class="project-link" target="_blank">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div class="project-number">02</div>
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="9" y1="9" x2="15" y2="9"></line>
+                            <line x1="9" y1="15" x2="15" y2="15"></line>
+                        </svg>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Web Application</div>
+                        <h3 class="project-title">AssoManager</h3>
+                        <p class="project-description">
+                            Application web de gestion multi-associations avec architecture MVC. 
+                            Gestion de stock, commandes et statistiques en temps réel.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">PHP</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">MVC</span>
+                        </div>
+                        <div class="project-footer">
+                            <a href="asso-manager.html" class="btn btn-text">
+                                Voir le projet
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                            <a href="https://github.com/Shok75/AssoManager" class="project-link" target="_blank">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Mes compétences</span>
+                <h2 class="section-title">Technologies & Outils</h2>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-group">
+                    <h3>💻 Langages</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                            <span>Java</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
+                            <span>PHP</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                            <span>Python</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+                            <span>HTML</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS">
+                            <span>CSS</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C">
+                            <span>C</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Bash">
+                            <span>Unix</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3>🔧 Technologies</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+                            <span>MySQL</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
+                            <span>PostgreSQL</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB">
+                            <span>MongoDB</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                            <span>Git</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3>⚙️ Outils</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" alt="IntelliJ">
+                            <span>IntelliJ</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg" alt="PyCharm">
+                            <span>PyCharm</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/phpstorm/phpstorm-original.svg" alt="PHPStorm">
+                            <span>PHPStorm</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux">
+                            <span>Linux</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-box">
+                <div class="contact-content">
+                    <span class="section-tag">Une question ?</span>
+                    <h2 class="contact-title">Travaillons ensemble !</h2>
+                    <p class="contact-text">
+                        Vous avez un projet en tête ou simplement envie d'échanger ? 
+                        N'hésitez pas à me contacter, je serais ravi de discuter avec vous.
+                    </p>
+                    <a href="https://mail.google.com/mail/?view=cm&to=sergioiut51@gmail.com"
+                       class="btn btn-primary btn-lg"
+                       target="_blank">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        Envoyer un email
+                    </a>
+                    <div class="social-links">
+                        <a href="https://github.com/Shok75" class="social-btn" target="_blank">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Portfolio. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
