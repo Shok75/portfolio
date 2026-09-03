@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Portfolio — Étudiant BUT Informatique</title>
+    <meta name="description" content="Portfolio d'un étudiant en 2ᵉ année de BUT Informatique (parcours Réalisation d'applications), à la recherche d'un stage. Développement web, backend et bases de données.">
+    <meta name="author" content="Portfolio">
+    <meta property="og:title" content="Portfolio — Étudiant BUT Informatique">
+    <meta property="og:description" content="Développement web, backend et bases de données. À la recherche d'un stage.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -24,25 +30,32 @@
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
 
+            <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
+    <main>
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-content">
                     <span class="badge">👋 Bienvenue sur mon portfolio</span>
                     <h1 class="hero-title">
-                        Je suis etudiant<span class="highlight"> en BUT</span><br>
-                         INFORMATIQUE
+                        Étudiant en <span class="highlight">BUT Informatique</span>
                     </h1>
                     <p class="hero-text">
-                        Étudiant en <strong>BUT Informatique</strong>, je suis à la recherche d'un stage.
+                        Parcours <strong>Réalisation d'applications</strong>. Je conçois des applications web
+                        et logicielles, avec un intérêt marqué pour le backend et les bases de données.
+                        Actuellement à la recherche d'un <strong>stage</strong>.
                     </p>
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-primary">
                             Découvrir mes projets
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
                         </a>
@@ -63,7 +76,7 @@
                             <line x1="8" y1="21" x2="16" y2="21"></line>
                             <line x1="12" y1="17" x2="12" y2="21"></line>
                         </svg>
-                        <span>  Data  </span>
+                        <span>Data</span>
                     </div>
                     <div class="floating-card card-3">
                         <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -121,8 +134,8 @@
                             </svg>
                         </div>
                         <div class="stat-content">
-                            <h3>3+</h3>
-                            <p>Projets réalisés</p>
+                            <h3>2</h3>
+                            <p>Projets en vedette</p>
                         </div>
                     </div>
 
@@ -190,8 +203,8 @@
                                     <path d="M5 12h14M12 5l7 7-7 7"/>
                                 </svg>
                             </a>
-                            <a href="https://github.com/Shok75/DemonRealm" class="project-link" target="_blank">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <a href="https://github.com/Shok75/DemonRealm" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Code de Demon Realm sur GitHub (nouvel onglet)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                                 </svg>
                             </a>
@@ -227,8 +240,8 @@
                                     <path d="M5 12h14M12 5l7 7-7 7"/>
                                 </svg>
                             </a>
-                            <a href="https://github.com/Shok75/AssoManager" class="project-link" target="_blank">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <a href="https://github.com/Shok75/AssoManager" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Code d'AssoManager sur GitHub (nouvel onglet)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                                 </svg>
                             </a>
@@ -251,35 +264,35 @@
                     <h3>💻 Langages</h3>
                     <div class="skill-items">
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
                             <span>Java</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
                             <span>PHP</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
                             <span>Python</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
                             <span>JavaScript</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
                             <span>HTML</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS">
                             <span>CSS</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C">
                             <span>C</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Bash">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Bash">
                             <span>Unix</span>
                         </div>
                     </div>
@@ -289,19 +302,19 @@
                     <h3>🔧 Technologies</h3>
                     <div class="skill-items">
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
                             <span>MySQL</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
                             <span>PostgreSQL</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB">
                             <span>MongoDB</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
                             <span>Git</span>
                         </div>
                     </div>
@@ -311,19 +324,19 @@
                     <h3>⚙️ Outils</h3>
                     <div class="skill-items">
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" alt="IntelliJ">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" alt="IntelliJ">
                             <span>IntelliJ</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg" alt="PyCharm">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg" alt="PyCharm">
                             <span>PyCharm</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/phpstorm/phpstorm-original.svg" alt="PHPStorm">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/phpstorm/phpstorm-original.svg" alt="PHPStorm">
                             <span>PHPStorm</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux">
+                            <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux">
                             <span>Linux</span>
                         </div>
                     </div>
@@ -342,18 +355,17 @@
                         Vous avez un projet en tête ou simplement envie d'échanger ? 
                         N'hésitez pas à me contacter, je serais ravi de discuter avec vous.
                     </p>
-                    <a href="https://mail.google.com/mail/?view=cm&to=removed@example.invalid"
-                       class="btn btn-primary btn-lg"
-                       target="_blank">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <a href="mailto:removed@example.invalid"
+                       class="btn btn-primary btn-lg">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                             <polyline points="22,6 12,13 2,6"></polyline>
                         </svg>
                         Envoyer un email
                     </a>
                     <div class="social-links">
-                        <a href="https://github.com/Shok75" class="social-btn" target="_blank">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <a href="https://github.com/Shok75" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Profil GitHub (nouvel onglet)">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                             </svg>
                         </a>
@@ -362,6 +374,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <footer class="footer">
         <div class="container">
@@ -369,6 +382,6 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

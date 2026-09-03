@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AssoManager - Portfolio</title>
+    <title>AssoManager — Gestion multi-associations PHP/MySQL | Portfolio</title>
+    <meta name="description" content="AssoManager : application web de gestion multi-associations en PHP (architecture MVC) et MySQL. Gestion de stock, commandes, soldes et statistiques.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/project.css">
@@ -23,10 +27,15 @@
                 <a href="index.html#contact" class="nav-link">Contact</a>
             </div>
 
-
+            <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
+    <main>
     <section class="project-hero" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
         <div class="container">
             <a href="index.html#projects" class="back-link">
@@ -70,8 +79,8 @@
                 </div>
 
                 <div class="project-links-hero">
-                    <a href="https://github.com/Shok75/AssoManager" class="btn btn-white" target="_blank">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <a href="https://github.com/Shok75/AssoManager" class="btn btn-white" target="_blank" rel="noopener noreferrer">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                         </svg>
                         Voir sur GitHub
@@ -87,22 +96,22 @@
                 <h2>Stack technique</h2>
                 <div class="tech-grid">
                     <div class="tech-card">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
+                        <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
                         <h3>PHP</h3>
                         <p>Backend avec POO et architecture MVC</p>
                     </div>
                     <div class="tech-card">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+                        <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
                         <h3>MySQL</h3>
                         <p>Base de données relationnelle</p>
                     </div>
                     <div class="tech-card">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                        <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
                         <h3>JavaScript</h3>
                         <p>Interactions dynamiques côté client</p>
                     </div>
                     <div class="tech-card">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML/CSS">
+                        <img loading="lazy" decoding="async" width="40" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML/CSS">
                         <h3>HTML/CSS</h3>
                         <p>Interface utilisateur responsive</p>
                     </div>
@@ -159,19 +168,19 @@
                 <h2>Interfaces</h2>
                 <div class="gallery-grid">
                     <div class="gallery-item">
-                        <img src="images/accueil.PNG" alt="Dashboard">
+                        <img loading="lazy" decoding="async" width="800" height="500" src="images/accueil.PNG" alt="Dashboard">
                         <p>Accueil Clients</p>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/historique.PNG" alt="Stock">
+                        <img loading="lazy" decoding="async" width="800" height="500" src="images/historique.PNG" alt="Stock">
                         <p>Historique</p>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/vente.PNG" alt="Commandes">
+                        <img loading="lazy" decoding="async" width="800" height="500" src="images/vente.PNG" alt="Commandes">
                         <p>Interface de commandes</p>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/stats.PNG" alt="Stats">
+                        <img loading="lazy" decoding="async" width="800" height="500" src="images/stats.PNG" alt="Stats">
                         <p>Graphiques et statistiques</p>
                     </div>
                 </div>
@@ -247,6 +256,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <footer class="footer">
         <div class="container">
@@ -254,6 +264,6 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -202,6 +202,173 @@
     height: 250px;
     object-fit: cover;
     display: block;
+    transition: transform 0.4s ease;
+}
+
+/* Image cliquable (activée par JS quand la lightbox est disponible) */
+.gallery-item img.zoomable {
+    cursor: zoom-in;
+}
+
+.gallery-item:hover img.zoomable {
+    transform: scale(1.05);
+}
+
+/* Petite loupe au survol pour signaler que l'image est cliquable */
+.gallery-item {
+    position: relative;
+}
+
+.gallery-item:has(img.zoomable)::before {
+    content: '🔍';
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.gallery-item:hover:has(img.zoomable)::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ------------------------------------------------------------------ *
+ * Lightbox
+ * ------------------------------------------------------------------ */
+body.lightbox-open {
+    overflow: hidden;
+}
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: clamp(1rem, 4vw, 3rem);
+    background: rgba(15, 15, 25, 0.92);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-figure {
+    margin: 0;
+    max-width: min(1100px, 92vw);
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 78vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+    background: #111;
+}
+
+.lightbox-img.zoom-in {
+    animation: lightboxZoom 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+
+@keyframes lightboxZoom {
+    from { transform: scale(0.85); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+
+.lightbox-caption {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.lightbox-close,
+.lightbox-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.lightbox-close:hover,
+.lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: scale(1.08);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: clamp(1rem, 3vw, 2rem);
+    right: clamp(1rem, 3vw, 2rem);
+    width: 48px;
+    height: 48px;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.lightbox-nav {
+    width: 54px;
+    height: 54px;
+    font-size: 2.2rem;
+    line-height: 1;
+}
+
+.lightbox-counter {
+    position: absolute;
+    bottom: clamp(1rem, 3vw, 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 640px) {
+    .lightbox {
+        gap: 0.25rem;
+        padding: 1rem;
+    }
+    .lightbox-nav {
+        width: 44px;
+        height: 44px;
+        font-size: 1.8rem;
+    }
+    .lightbox-img {
+        max-height: 70vh;
+    }
 }
 
 .gallery-item p {
@@ -235,6 +402,7 @@
 .challenge-number {
     font-size: 3rem;
     font-weight: 800;
+    color: var(--primary); /* repli si background-clip:text non supporté */
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

@@ -32,6 +32,29 @@
 
 html {
     scroll-behavior: smooth;
+    /* Compense la navbar fixe pour que les ancres ne passent pas dessous */
+    scroll-padding-top: 90px;
+}
+
+/* Accessibilité : indicateur de focus clavier visible partout */
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Respect des préférences de mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
 }
 
 body {
@@ -74,7 +97,11 @@ button {
     backdrop-filter: blur(10px);
     box-shadow: var(--shadow-sm);
     z-index: 1000;
-    transition: var(--transition);
+    transition: box-shadow 0.3s ease;
+}
+
+.navbar.scrolled {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar .container {
@@ -88,6 +115,7 @@ button {
 .logo-text {
     font-size: 1.5rem;
     font-weight: 700;
+    color: var(--primary); /* repli si background-clip:text non supporté */
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -131,7 +159,12 @@ button {
 .burger {
     display: none;
     flex-direction: column;
-    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 44px;   /* cible tactile ≥ 44px (WCAG) */
+    height: 44px;
+    padding: 0;
 }
 
 .burger span {
@@ -139,7 +172,23 @@ button {
     height: 3px;
     background: var(--text-primary);
     border-radius: 3px;
-    transition: var(--transition);
+    transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+/* Transformation en croix quand le menu est ouvert */
+.burger.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+.burger.active span:nth-child(2) {
+    opacity: 0;
+}
+.burger.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Empêche le scroll du corps quand le menu mobile est ouvert */
+body.menu-open {
+    overflow: hidden;
 }
 
 .hero {
@@ -178,6 +227,7 @@ button {
 }
 
 .highlight {
+    color: var(--primary); /* repli si background-clip:text non supporté */
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -663,17 +713,38 @@ section {
     font-size: 0.95rem;
 }
 
+/* Révélation au scroll : appliquée seulement quand JS ajoute .reveal,
+   donc le contenu reste visible si JS est absent. */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 @media (max-width: 968px) {
     .nav-links {
         position: fixed;
-        top: 80px;
+        top: 72px;
         left: -100%;
         flex-direction: column;
-        background: white;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        background: var(--bg-primary);
         width: 100%;
+        height: calc(100vh - 72px);
         padding: 2rem;
         box-shadow: var(--shadow-lg);
-        transition: var(--transition);
+        transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-links .nav-link {
+        font-size: 1.25rem;
     }
 
     .nav-links.active {
@@ -703,11 +774,53 @@ section {
     .skills-grid {
         grid-template-columns: 1fr;
     }
+
+    /* Espacements plus compacts pour améliorer la lisibilité */
+    section {
+        padding: 4rem 0;
+    }
+
+    .navbar .container {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .hero {
+        min-height: auto;
+        padding-top: 110px;
+        padding-bottom: 3rem;
+    }
+
+    .hero-grid {
+        gap: 2rem;
+    }
+
+    .section-header {
+        margin-bottom: 2.5rem;
+    }
 }
 
 @media (max-width: 640px) {
+    .container {
+        padding: 0 1.25rem;
+    }
+
+    section {
+        padding: 3rem 0;
+    }
+
     .hero-buttons {
         flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-buttons .btn {
+        justify-content: center;
+    }
+
+    .badge {
+        font-size: 0.8rem;
+        padding: 0.6rem 1.1rem;
     }
 
     .skills-preview {
@@ -716,5 +829,29 @@ section {
 
     .skill-items {
         grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .stat-box {
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+
+    .stat-content h3 {
+        font-size: 2rem;
+    }
+
+    .project-content {
+        padding: 1.5rem;
+    }
+
+    .project-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .skill-items {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
