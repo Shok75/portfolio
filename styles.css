@@ -206,3 +206,7 @@ body[data-view=accueil] .hero{padding-right:310px;max-width:none}
   .pd-meta{grid-template-columns:1fr 1fr}
   .pd-thumb{width:78px;height:48px}
 }
+
+/* Sélecteur de langue */
+#lang-toggle{font-size:12px;font-weight:700;letter-spacing:1px;border:1px solid var(--line);border-radius:6px;padding:6px 11px;background:#0a1322cc;color:var(--ink);transition:.2s}
+#lang-toggle:hover{border-color:var(--accent);color:var(--accent)}
