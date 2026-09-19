@@ -27,6 +27,8 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           enablement: true
+      - name: Exclude private tools from the published site
+        run: rm -f editor.html   # éditeur privé : gardé dans le repo, non publié
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:

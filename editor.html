@@ -57,6 +57,10 @@ body:not(.unlocked) .wrap,body:not(.unlocked) .out,body:not(.unlocked) .top{filt
 .gate-err{color:#ff6b81;min-height:1em;font-size:13px}
 .linklike{background:none;border:0;color:var(--accent);cursor:pointer;font-size:12px;padding:4px}
 .gate-out{background:#070c15;border:1px solid var(--line);border-radius:8px;padding:10px;font:12px/1.4 ui-monospace,Menlo,monospace;color:#cfe0ee;white-space:pre-wrap;word-break:break-all;text-align:left;margin:0}
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat{background:#0a1322;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat b{display:block;font-size:24px;color:var(--accent);line-height:1}
+.stat span{display:block;font-size:11px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase;margin-top:5px}
 </style>
 </head>
 <body>
@@ -85,6 +89,12 @@ body:not(.unlocked) .wrap,body:not(.unlocked) .out,body:not(.unlocked) .top{filt
     Tout se passe dans ton navigateur : <b>rien n'est envoyé</b>. Pour une image de projet, dépose d'abord le
     fichier <b>.webp</b> dans le dossier <b>assets/</b> et indique ici son nom sans extension.
   </div>
+
+  <fieldset>
+    <legend>Statistiques du contenu</legend>
+    <div id="stats" class="statgrid"></div>
+    <small class="hint">Statistiques calculées localement à partir de ton contenu. Les statistiques de visite (fréquentation du site) nécessiteront un service dédié — à ajouter plus tard.</small>
+  </fieldset>
 
   <fieldset>
     <legend>Coordonnées</legend>
@@ -300,6 +310,7 @@ function renderProjects() {
 
     root.appendChild(c);
   });
+  if (document.querySelector('#stats')) computeStats();
 }
 function esc(s) { return String(s == null ? '' : s).replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
 
@@ -311,8 +322,23 @@ function toDataJs() {
   return "// Source unique des données du portfolio — bilingue {fr,en}.\n// Généré via editor.html (aucune donnée envoyée). Édite ici puis commit ce fichier.\nwindow.portfolio = " + JSON.stringify(out, null, 2) + ";\n";
 }
 
+/* ---- Statistiques de contenu ---- */
+function computeStats() {
+  const pr = P.projects;
+  const by = s => pr.filter(p => p.state === s).length;
+  const sk = (P.skills.languages.length) + (P.skills.technologies.length) + (P.skills.tools.length);
+  const imgs = pr.reduce((n, p) => n + (p.images ? p.images.length : 0), 0);
+  const feats = pr.reduce((n, p) => n + (p.features ? p.features.length : 0), 0);
+  const chals = pr.reduce((n, p) => n + (p.challenges ? p.challenges.length : 0), 0);
+  const tiles = [
+    [pr.length, 'Projets'], [by('done'), 'Terminés'], [by('in-progress'), 'En cours'], [by('upcoming'), 'À venir'],
+    [sk, 'Compétences'], [imgs, 'Images'], [feats, 'Fonctionnalités'], [chals, 'Défis']
+  ];
+  $('#stats').innerHTML = tiles.map(([n, l]) => '<div class="stat"><b>' + n + '</b><span>' + l + '</span></div>').join('');
+}
+
 /* ---- Init & événements ---- */
-function boot() { loadFromWindow(); fillTop(); renderProjects(); $('#status').textContent = 'Chargé depuis data.js — ' + P.projects.length + ' projet(s).'; }
+function boot() { loadFromWindow(); fillTop(); renderProjects(); computeStats(); $('#status').textContent = 'Chargé depuis data.js — ' + P.projects.length + ' projet(s).'; }
 $('#addProject').onclick = () => { P.projects.push(normProject({ id: 'nouveau-projet', name: { fr: 'Nouveau projet', en: 'New project' }, state: 'in-progress' })); renderProjects(); };
 $('#reload').onclick = boot;
 $('#generate').onclick = () => { $('#outCode').value = toDataJs(); $('#outDlg').showModal(); };
