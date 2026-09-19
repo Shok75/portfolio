@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Éditeur · Portfolio</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e1522'/%3E%3Cpath d='m25 20-12 12 12 12m14-24 12 12-12 12' stroke='%237ed9f7' stroke-width='5' fill='none'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#0a0f1a;--panel:#111a2b;--panel2:#0c1424;--line:#22314c;--ink:#eaf0fb;--dim:#9aa7c0;--accent:#7ed9f7;--accent2:#4aa8e6;--ok:#35e08a;--warn:#ff9d5c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,Segoe UI,Roboto,sans-serif;padding:0 0 120px}
+a{color:var(--accent)}
+header.top{position:sticky;top:0;z-index:10;background:#0a0f1ae6;backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:14px clamp(16px,4vw,40px);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+header.top h1{font-size:18px;letter-spacing:1px;margin:0;flex:1;min-width:200px}
+header.top .badge{font-size:11px;letter-spacing:1px;color:var(--accent);border:1px solid var(--line);border-radius:6px;padding:4px 8px}
+.wrap{max-width:960px;margin:0 auto;padding:24px clamp(16px,4vw,40px)}
+.note{background:#0e1a2c;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:14px 16px;color:var(--dim);font-size:13.5px;margin-bottom:22px}
+.note b{color:var(--ink)}
+fieldset{border:1px solid var(--line);border-radius:14px;padding:18px;margin:0 0 22px;background:var(--panel2)}
+legend{padding:0 10px;font-weight:700;letter-spacing:1px;color:var(--accent);text-transform:uppercase;font-size:13px}
+label{display:block;font-size:12px;letter-spacing:.5px;color:var(--dim);margin:10px 0 4px;text-transform:uppercase}
+input,textarea,select{width:100%;background:#0a1220;border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:9px 11px;font:inherit}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--accent2);outline-offset:1px;border-color:var(--accent2)}
+textarea{min-height:64px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.bi{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bi .tag{font-size:10px;color:var(--accent);letter-spacing:1px}
+.proj{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px;background:var(--panel)}
+.proj-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.proj-head strong{flex:1;font-size:16px}
+.sub{border:1px dashed var(--line);border-radius:10px;padding:12px;margin:8px 0}
+.sub-item{border-bottom:1px solid var(--line);padding:10px 0}
+.sub-item:last-child{border-bottom:none}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:#12203a;color:var(--ink);border-radius:8px;padding:8px 14px;transition:.15s}
+button:hover{border-color:var(--accent);color:var(--accent)}
+button.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#04121f;border:0;font-weight:700}
+button.sm{padding:5px 9px;font-size:12px}
+button.danger:hover{border-color:#ff6b81;color:#ff6b81}
+.chiprow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.out{position:fixed;bottom:0;left:0;right:0;background:#0a0f1af2;border-top:1px solid var(--line);padding:12px clamp(16px,4vw,40px);display:flex;gap:12px;align-items:center;flex-wrap:wrap;z-index:20}
+.out .grow{flex:1;min-width:160px;color:var(--dim);font-size:13px}
+dialog{background:#0c1424;color:var(--ink);border:1px solid var(--line);border-radius:14px;max-width:900px;width:calc(100% - 32px);padding:0}
+dialog::backdrop{background:#050a13cc;backdrop-filter:blur(6px)}
+.dlg-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.dlg-head h3{margin:0;flex:1;font-size:15px}
+#outCode{width:100%;min-height:50vh;border:0;border-radius:0 0 14px 14px;background:#070c15;color:#cfe0ee;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:16px}
+small.hint{display:block;color:var(--dim);font-size:11px;margin-top:3px;text-transform:none;letter-spacing:0}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Éditeur du portfolio</h1>
+  <span class="badge">LOCAL · AUCUN COMPTE</span>
+  <a href="index.html">← Voir le site</a>
+</header>
+
+<div class="wrap">
+  <div class="note">
+    <b>Comment ça marche</b> — Remplis les champs (FR + EN). Clique <b>« Générer data.js »</b> en bas :
+    l'outil produit le contenu du fichier. <b>Copie-le</b> (ou télécharge-le) et remplace <b>data.js</b> dans ton dépôt
+    (GitHub → fichier <b>data.js</b> → ✎ → colle → Commit). GitHub Pages se redéploie tout seul.
+    Tout se passe dans ton navigateur : <b>rien n'est envoyé</b>. Pour une image de projet, dépose d'abord le
+    fichier <b>.webp</b> dans le dossier <b>assets/</b> et indique ici son nom sans extension.
+  </div>
+
+  <fieldset>
+    <legend>Coordonnées</legend>
+    <div class="row">
+      <div><label>Email</label><input id="f-email"></div>
+      <div><label>GitHub (URL)</label><input id="f-github"></div>
+    </div>
+    <div class="row">
+      <div><label>LinkedIn (URL)</label><input id="f-linkedin" placeholder="https://www.linkedin.com/in/…"></div>
+      <div><label>CV (chemin ou URL)</label><input id="f-cv" placeholder="assets/cv.pdf"></div>
+    </div>
+    <div class="bi">
+      <div><label>Disponibilité <span class="tag">FR</span></label><input id="f-availfr"></div>
+      <div><label>Availability <span class="tag">EN</span></label><input id="f-availen"></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Compétences</legend>
+    <label>Langages <small class="hint">séparés par des virgules</small></label><input id="f-sk-languages">
+    <label>Technologies</label><input id="f-sk-technologies">
+    <label>Outils</label><input id="f-sk-tools">
+  </fieldset>
+
+  <fieldset>
+    <legend>Formation</legend>
+    <label>Période</label><input id="f-edu-period" placeholder="2024 — 2027">
+    <div class="bi">
+      <div><label>Intitulé <span class="tag">FR</span></label><input id="f-edu-titlefr"></div>
+      <div><label>Title <span class="tag">EN</span></label><input id="f-edu-titleen"></div>
+    </div>
+    <div class="bi">
+      <div><label>Description <span class="tag">FR</span></label><textarea id="f-edu-descfr"></textarea></div>
+      <div><label>Description <span class="tag">EN</span></label><textarea id="f-edu-descen"></textarea></div>
+    </div>
+    <div class="bi">
+      <div><label>Tags <span class="tag">FR</span> <small class="hint">virgules</small></label><input id="f-edu-tagsfr"></div>
+      <div><label>Tags <span class="tag">EN</span></label><input id="f-edu-tagsen"></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Projets</legend>
+    <div id="projects"></div>
+    <button class="primary" id="addProject">+ Ajouter un projet</button>
+  </fieldset>
+</div>
+
+<div class="out">
+  <span class="grow" id="status">Prêt.</span>
+  <button id="reload">↺ Recharger data.js actuel</button>
+  <button class="primary" id="generate">Générer data.js →</button>
+</div>
+
+<dialog id="outDlg">
+  <div class="dlg-head">
+    <h3>data.js généré</h3>
+    <button class="sm" id="copyBtn">Copier</button>
+    <button class="sm" id="downloadBtn">Télécharger</button>
+    <button class="sm" id="closeDlg">Fermer</button>
+  </div>
+  <textarea id="outCode" spellcheck="false" readonly></textarea>
+</dialog>
+
+<script src="data.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const el = (t, c) => { const e = document.createElement(t); if (c) e.className = c; return e; };
+const bi = v => (v && typeof v === 'object' && !Array.isArray(v)) ? { fr: v.fr || '', en: v.en || '' } : { fr: v || '', en: v || '' };
+const arrToStr = a => (a || []).map(x => (x && typeof x === 'object') ? (x.en || x.fr) : x).join(', ');
+const strToArr = s => s.split(',').map(x => x.trim()).filter(Boolean);
+
+let P; // état de travail
+
+function loadFromWindow() {
+  const src = JSON.parse(JSON.stringify(window.portfolio || {}));
+  P = {
+    name: src.name || 'Portfolio', email: src.email || '', github: src.github || '',
+    linkedin: src.linkedin || '', cv: src.cv || '', analytics: src.analytics || '',
+    availability: bi(src.availability),
+    skills: {
+      languages: src.skills?.languages || [], technologies: src.skills?.technologies || [], tools: src.skills?.tools || []
+    },
+    education: {
+      period: src.education?.period || '',
+      title: bi(src.education?.title), description: bi(src.education?.description),
+      tags: { fr: (src.education?.tags?.fr || src.education?.tags || []), en: (src.education?.tags?.en || src.education?.tags || []) }
+    },
+    projects: (src.projects || []).map(normProject)
+  };
+}
+function normProject(p) {
+  return {
+    id: p.id || '', name: bi(p.name), context: p.context || 'academique', state: p.state || 'in-progress',
+    year: p.year || '', github: p.github || '', tech: (p.tech || []).map(x => (x && typeof x === 'object') ? (x.en || x.fr) : x),
+    description: bi(p.description),
+    features: (p.features || []).map(([a, b]) => [bi(a), bi(b)]),
+    challenges: (p.challenges || []).map(([a, b]) => [bi(a), bi(b)]),
+    roles: (p.roles || []).map(([a, b]) => [bi(a), bi(b)]),
+    images: (p.images || []).map(([f, c]) => [f, bi(c)])
+  };
+}
+
+/* ---- Champs simples ---- */
+function fillTop() {
+  $('#f-email').value = P.email; $('#f-github').value = P.github; $('#f-linkedin').value = P.linkedin; $('#f-cv').value = P.cv;
+  $('#f-availfr').value = P.availability.fr; $('#f-availen').value = P.availability.en;
+  $('#f-sk-languages').value = arrToStr(P.skills.languages);
+  $('#f-sk-technologies').value = arrToStr(P.skills.technologies);
+  $('#f-sk-tools').value = arrToStr(P.skills.tools);
+  $('#f-edu-period').value = P.education.period;
+  $('#f-edu-titlefr').value = P.education.title.fr; $('#f-edu-titleen').value = P.education.title.en;
+  $('#f-edu-descfr').value = P.education.description.fr; $('#f-edu-descen').value = P.education.description.en;
+  $('#f-edu-tagsfr').value = (P.education.tags.fr || []).join(', ');
+  $('#f-edu-tagsen').value = (P.education.tags.en || []).join(', ');
+}
+function readTop() {
+  P.email = $('#f-email').value.trim(); P.github = $('#f-github').value.trim();
+  P.linkedin = $('#f-linkedin').value.trim(); P.cv = $('#f-cv').value.trim();
+  P.availability = { fr: $('#f-availfr').value.trim(), en: $('#f-availen').value.trim() };
+  P.skills.languages = strToArr($('#f-sk-languages').value);
+  P.skills.technologies = strToArr($('#f-sk-technologies').value);
+  P.skills.tools = strToArr($('#f-sk-tools').value);
+  P.education.period = $('#f-edu-period').value.trim();
+  P.education.title = { fr: $('#f-edu-titlefr').value.trim(), en: $('#f-edu-titleen').value.trim() };
+  P.education.description = { fr: $('#f-edu-descfr').value.trim(), en: $('#f-edu-descen').value.trim() };
+  P.education.tags = { fr: strToArr($('#f-edu-tagsfr').value), en: strToArr($('#f-edu-tagsen').value) };
+}
+
+/* ---- Champ bilingue lié à un objet {fr,en} ---- */
+function biField(labelFr, labelEn, obj, multiline) {
+  const g = el('div', 'bi');
+  [['fr', labelFr], ['en', labelEn]].forEach(([k, lab]) => {
+    const d = el('div');
+    d.innerHTML = '<label>' + lab + ' <span class="tag">' + k.toUpperCase() + '</span></label>';
+    const inp = el(multiline ? 'textarea' : 'input');
+    inp.value = obj[k] || '';
+    inp.oninput = () => { obj[k] = inp.value; };
+    d.appendChild(inp); g.appendChild(d);
+  });
+  return g;
+}
+
+/* ---- Listes répétables (features / challenges / roles) ---- */
+function pairList(title, arr, container) {
+  const box = el('div', 'sub');
+  box.innerHTML = '<label>' + title + '</label>';
+  arr.forEach((pair, i) => {
+    const item = el('div', 'sub-item');
+    item.appendChild(biField('Titre', 'Title', pair[0]));
+    item.appendChild(biField('Texte', 'Text', pair[1], true));
+    const rm = el('button', 'sm danger'); rm.textContent = 'Supprimer'; rm.type = 'button';
+    rm.onclick = () => { arr.splice(i, 1); renderProjects(); };
+    const a = el('div', 'actions'); a.appendChild(rm); item.appendChild(a);
+    box.appendChild(item);
+  });
+  const add = el('button', 'sm'); add.type = 'button'; add.textContent = '+ Ajouter';
+  add.onclick = () => { arr.push([{ fr: '', en: '' }, { fr: '', en: '' }]); renderProjects(); };
+  box.appendChild(add);
+  container.appendChild(box);
+}
+function imageList(arr, container) {
+  const box = el('div', 'sub');
+  box.innerHTML = '<label>Captures d’écran <small class="hint">nom du fichier dans assets/ sans « .webp »</small></label>';
+  arr.forEach((img, i) => {
+    const item = el('div', 'sub-item');
+    const d = el('div'); d.innerHTML = '<label>Fichier</label>';
+    const inp = el('input'); inp.value = img[0]; inp.placeholder = 'ex: menuDemonRealm'; inp.oninput = () => { img[0] = inp.value.trim().replace(/\.webp$/, ''); };
+    d.appendChild(inp); item.appendChild(d);
+    item.appendChild(biField('Légende', 'Caption', img[1]));
+    const rm = el('button', 'sm danger'); rm.type = 'button'; rm.textContent = 'Supprimer';
+    rm.onclick = () => { arr.splice(i, 1); renderProjects(); };
+    const a = el('div', 'actions'); a.appendChild(rm); item.appendChild(a);
+    box.appendChild(item);
+  });
+  const add = el('button', 'sm'); add.type = 'button'; add.textContent = '+ Ajouter une image';
+  add.onclick = () => { arr.push(['', { fr: '', en: '' }]); renderProjects(); };
+  box.appendChild(add);
+  container.appendChild(box);
+}
+
+/* ---- Projets ---- */
+function renderProjects() {
+  const root = $('#projects'); root.innerHTML = '';
+  P.projects.forEach((p, idx) => {
+    const c = el('div', 'proj');
+    const head = el('div', 'proj-head');
+    head.innerHTML = '<strong>Projet ' + (idx + 1) + ' — ' + (p.name.fr || p.name.en || p.id || '(sans nom)') + '</strong>';
+    const up = el('button', 'sm'); up.type = 'button'; up.textContent = '↑'; up.title = 'Monter'; up.onclick = () => { if (idx > 0) { [P.projects[idx - 1], P.projects[idx]] = [P.projects[idx], P.projects[idx - 1]]; renderProjects(); } };
+    const dn = el('button', 'sm'); dn.type = 'button'; dn.textContent = '↓'; dn.title = 'Descendre'; dn.onclick = () => { if (idx < P.projects.length - 1) { [P.projects[idx + 1], P.projects[idx]] = [P.projects[idx], P.projects[idx + 1]]; renderProjects(); } };
+    const del = el('button', 'sm danger'); del.type = 'button'; del.textContent = 'Supprimer'; del.onclick = () => { if (confirm('Supprimer ce projet ?')) { P.projects.splice(idx, 1); renderProjects(); } };
+    head.append(up, dn, del); c.appendChild(head);
+
+    const meta = el('div', 'row3');
+    meta.innerHTML = '<div><label>Identifiant (id)</label><input value="' + esc(p.id) + '" data-k="id"></div>' +
+      '<div><label>Année</label><input value="' + esc(p.year) + '" data-k="year"></div>' +
+      '<div><label>GitHub (URL)</label><input value="' + esc(p.github) + '" data-k="github"></div>';
+    meta.querySelectorAll('input').forEach(inp => inp.oninput = () => { p[inp.dataset.k] = inp.value.trim(); });
+    c.appendChild(meta);
+
+    const meta2 = el('div', 'row');
+    const dctx = el('div'); dctx.innerHTML = '<label>Catégorie</label>';
+    const sctx = el('select'); [['academique', 'Projet académique'], ['personnel', 'Projet personnel']].forEach(([v, t]) => { const o = el('option'); o.value = v; o.textContent = t; if (p.context === v) o.selected = true; sctx.appendChild(o); });
+    sctx.onchange = () => p.context = sctx.value; dctx.appendChild(sctx); meta2.appendChild(dctx);
+    const dst = el('div'); dst.innerHTML = '<label>Statut</label>';
+    const sst = el('select'); [['in-progress', 'En développement'], ['done', 'Terminé'], ['upcoming', 'À venir']].forEach(([v, t]) => { const o = el('option'); o.value = v; o.textContent = t; if (p.state === v) o.selected = true; sst.appendChild(o); });
+    sst.onchange = () => p.state = sst.value; dst.appendChild(sst); meta2.appendChild(dst);
+    c.appendChild(meta2);
+
+    c.appendChild(biField('Nom', 'Name', p.name));
+    const dtech = el('div'); dtech.innerHTML = '<label>Technologies <small class="hint">virgules</small></label>';
+    const itech = el('input'); itech.value = arrToStr(p.tech); itech.oninput = () => p.tech = strToArr(itech.value); dtech.appendChild(itech); c.appendChild(dtech);
+    c.appendChild(biField('Description', 'Description', p.description, true));
+
+    pairList('Fonctionnalités', p.features, c);
+    pairList('Défis techniques', p.challenges, c);
+    pairList('Architecture & rôles (optionnel)', p.roles, c);
+    imageList(p.images, c);
+
+    root.appendChild(c);
+  });
+}
+function esc(s) { return String(s == null ? '' : s).replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+
+/* ---- Génération ---- */
+function toDataJs() {
+  readTop();
+  const out = JSON.parse(JSON.stringify(P));
+  out.projects.forEach(p => { if (!p.roles || !p.roles.length) delete p.roles; });
+  return "// Source unique des données du portfolio — bilingue {fr,en}.\n// Généré via editor.html (aucune donnée envoyée). Édite ici puis commit ce fichier.\nwindow.portfolio = " + JSON.stringify(out, null, 2) + ";\n";
+}
+
+/* ---- Init & événements ---- */
+function boot() { loadFromWindow(); fillTop(); renderProjects(); $('#status').textContent = 'Chargé depuis data.js — ' + P.projects.length + ' projet(s).'; }
+$('#addProject').onclick = () => { P.projects.push(normProject({ id: 'nouveau-projet', name: { fr: 'Nouveau projet', en: 'New project' }, state: 'in-progress' })); renderProjects(); };
+$('#reload').onclick = boot;
+$('#generate').onclick = () => { $('#outCode').value = toDataJs(); $('#outDlg').showModal(); };
+$('#closeDlg').onclick = () => $('#outDlg').close();
+$('#copyBtn').onclick = async () => { try { await navigator.clipboard.writeText($('#outCode').value); $('#copyBtn').textContent = 'Copié ✓'; setTimeout(() => $('#copyBtn').textContent = 'Copier', 1500); } catch { $('#outCode').select(); document.execCommand('copy'); } };
+$('#downloadBtn').onclick = () => { const b = new Blob([$('#outCode').value], { type: 'text/javascript' }); const a = el('a'); a.href = URL.createObjectURL(b); a.download = 'data.js'; a.click(); URL.revokeObjectURL(a.href); };
+boot();
+</script>
+</body>
+</html>
