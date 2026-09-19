@@ -5,7 +5,7 @@ window.portfolio = {
   github: 'https://github.com/Shok75',
   // Endpoint HTTPS du formulaire de contact (ex: service de formulaire).
   // Laisser vide = le formulaire s'affiche mais l'envoi est désactivé.
-  contactEndpoint: '',
+  contactEndpoint: 'https://formspree.io/f/mvkgzpyk',
   availability: {
     fr: 'Recherche de stage · 4 mois ou plus à partir de mars',
     en: 'Seeking an internship · 4+ months from March'
