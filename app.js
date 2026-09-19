@@ -38,11 +38,19 @@ const skillFiles = { 'Java': 'java', 'JavaFX': 'java', 'PHP': 'php', 'Python': '
 const skillLogo = name => '<img class="technology-logo" src="assets/logos/' + skillFiles[name] + '.svg" alt="" width="32" height="32" loading="lazy">';
 function techItem(n) { const name = tf(n); const f = skillFiles[name]; return '<li>' + (f ? '<img src="assets/logos/' + f + '.svg" alt="" width="22" height="22" loading="lazy">' : '<span class="pd-tech-ph">' + esc(name[0]) + '</span>') + '<span>' + esc(name) + '</span></li>'; }
 function gallery(p) { return '<div class="gallery-grid">' + p.images.map(([file, label]) => '<button class="gallery-shot" data-image="assets/' + file + '.webp" data-caption="' + esc(tf(label)) + '"><img src="assets/' + file + '.webp" alt="' + esc(tf(label)) + '" loading="lazy"><span>' + esc(tf(label)) + '</span></button>').join('') + '</div>'; }
-function personalLink(type, label) {
-  const url = data[type]; if (!url) return '<div class="contact-option">' + esc(label) + '<small>' + T.common.toBeAdded + '</small></div>';
-  const safe = type === 'email' ? 'mailto:' + url : url;
-  if (type !== 'email' && type !== 'cv' && !/^https?:\/\//.test(safe)) return '';
-  return '<a class="contact-option" href="' + esc(safe) + '"' + (type === 'email' ? '' : ' target="_blank" rel="noopener noreferrer"') + '>' + esc(label) + '<small>' + T.common.open + '</small></a>';
+function contactForm(compact) {
+  const C = T.contact, prefix = compact ? 'phone-message' : 'contact-message';
+  return '<form class="message-form' + (compact ? ' message-form-compact' : '') + '" data-contact-form novalidate>' +
+    '<div class="message-form-heading"><span>' + uiIcon('contact') + '</span><div><small>' + esc(C.formSmall) + '</small><h3>' + esc(C.formTitle) + '</h3></div></div>' +
+    '<div class="message-fields"><label for="' + prefix + '-name">' + esc(C.fName) + '<input id="' + prefix + '-name" name="name" autocomplete="name" required maxlength="100" placeholder="' + esc(C.phName) + '"></label>' +
+    '<label for="' + prefix + '-email">' + esc(C.fEmail) + '<input id="' + prefix + '-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="' + esc(C.phEmail) + '"></label></div>' +
+    '<label for="' + prefix + '-body">' + esc(C.fMessage) + '<textarea id="' + prefix + '-body" name="message" required minlength="10" maxlength="5000" rows="' + (compact ? 4 : 6) + '" placeholder="' + esc(C.phMessage) + '"></textarea></label>' +
+    '<div class="message-trap" aria-hidden="true"><label>' + esc(C.trap) + '<input name="website" tabindex="-1" autocomplete="off"></label></div>' +
+    '<p class="message-privacy">' + esc(C.privacy) + '</p>' +
+    '<button class="btn message-send" type="submit">' + esc(C.send) + ' <span aria-hidden="true">↗</span></button>' +
+    '<p class="message-status" role="status" aria-live="polite"></p>' +
+    (data.contactEndpoint ? '' : '<p class="message-setup">' + esc(C.setup) + '</p>') +
+    '</form>';
 }
 
 /* ---- Cartes projets ---- */
@@ -69,7 +77,7 @@ const views = {
   projets: () => '<div class="section-index">' + esc(T.projets.index) + '</div><h1>' + esc(T.projets.h1) + '</h1><p class="intro">' + esc(T.projets.intro) + '</p>' + projectGroups(),
   competences: () => '<div class="section-index">' + esc(T.competences.index) + '</div><h1>' + T.competences.h1 + '</h1>' + Object.entries(data.skills).map(([cat, items]) => '<section class="skill-group"><h3>' + esc(T.skillCat[cat]) + '</h3><div class="skills-grid">' + items.map(x => '<div class="skill">' + skillLogo(x) + '<span>' + esc(x) + '</span></div>').join('') + '</div></section>').join(''),
   parcours: () => '<div class="section-index">' + esc(T.parcours.index) + '</div><h1>' + T.parcours.h1 + '</h1><p class="intro">' + esc(T.parcours.intro) + '</p><article class="formation-card"><div class="formation-icon">' + uiIcon('competences') + '</div><div><span class="eyebrow">' + esc(T.parcours.eduEyebrow) + ' · ' + esc(data.education.period) + '</span><h2>' + esc(tf(data.education.title)) + '</h2><p>' + esc(tf(data.education.description)) + '</p>' + tags(tf(data.education.tags)) + '</div></article><h2 class="journey-title">' + esc(T.parcours.journeyTitle) + '</h2><p class="journey-hint">' + esc(T.parcours.journeyHint) + '</p><div class="project-journal">' + data.projects.filter(p => p.state !== 'upcoming').slice().sort((a, b) => Number(b.year) - Number(a.year)).map(p => '<details class="journal-entry"><summary><span class="journal-year">' + esc(p.year) + '</span><span class="journal-heading"><small>' + esc(projectContext(p)) + '</small><strong>' + esc(tf(p.name)) + '</strong></span><span class="journal-plus" aria-hidden="true">+</span></summary><div class="journal-body"><p>' + esc(tf(p.description)) + '</p>' + tags(p.tech) + '<h3>' + esc(T.parcours.delivers) + '</h3><ul>' + p.features.map(([title, d]) => '<li><strong>' + esc(tf(title)) + '</strong><span>' + esc(tf(d)) + '</span></li>').join('') + '</ul><h3>' + esc(T.parcours.devChallenges) + '</h3><p>' + p.challenges.map(([title]) => esc(tf(title))).join(' · ') + '</p><button class="btn secondary" data-project="' + esc(p.id) + '">' + T.common.explore + '</button></div></details>').join('') + '</div>',
-  contact: () => '<div class="section-index">' + esc(T.contact.index) + '</div><h1>' + T.contact.h1 + '</h1><p class="intro">' + esc(T.contact.intro) + '</p><div class="contact-options">' + personalLink('email', T.contact.email) + (data.github ? personalLink('github', T.contact.github) : '') + (data.linkedin ? personalLink('linkedin', T.contact.linkedin) : '') + (data.cv ? personalLink('cv', T.contact.cv) : '') + '</div>',
+  contact: () => '<div class="section-index">' + esc(T.contact.index) + '</div><h1>' + esc(T.contact.h1) + '</h1><p class="intro">' + esc(T.contact.intro) + '</p>' + contactForm(false) + (data.github ? '<div class="contact-alternatives"><a href="' + esc(data.github) + '" target="_blank" rel="noopener noreferrer">' + uiIcon('projets') + '<span>' + esc(T.contact.ghLabel) + '<small>' + esc(T.contact.ghAlt) + '</small></span></a></div>' : ''),
   galerie: () => '<div class="section-index">' + esc(T.galerie.index) + '</div><h1>' + esc(T.galerie.h1) + '</h1>' + data.projects.filter(p => p.images.length).map(p => '<h3>' + esc(tf(p.name)) + '</h3>' + gallery(p)).join('')
 };
 
@@ -109,7 +117,7 @@ function phoneApp(id) {
   else if (id === 'competences') c = '<h3>' + esc(V.techs) + '</h3><div class="phone-tags">' + Object.values(data.skills).flat().map(x => '<span>' + skillLogo(x) + esc(x) + '</span>').join('') + '</div>';
   else if (id === 'parcours') c = '<h3>' + esc(V.myJourney) + '</h3><p>' + V.journeyLine + '</p><a class="phone-item" href="#parcours">' + esc(V.discoverJourney) + '</a>';
   else if (id === 'galerie') c = '<h3>' + esc(V.gallery) + '</h3>' + data.projects.filter(p => p.images.length).map(p => '<p>' + esc(tf(p.name)) + '</p>' + gallery(p)).join('');
-  else c = '<h3>' + esc(V.contact) + '</h3>' + personalLink('email', 'Email') + (data.github ? personalLink('github', 'GitHub') : '') + (data.linkedin ? personalLink('linkedin', 'LinkedIn') : '') + (data.cv ? personalLink('cv', T.contact.cv.replace(' ↗', '')) : '');
+  else c = contactForm(true);
   $('#phone-content').innerHTML = '<div class="phone-body"><button class="phone-back" data-home>← ' + esc(T.phone.back) + '</button>' + c + '</div>';
 }
 function togglePhone(force) { const show = force ?? $('#phone').classList.contains('hidden'); $('#phone').classList.toggle('hidden', !show); $('#phone').inert = !show; $('#phone-toggle').setAttribute('aria-expanded', String(show)); if (show) $('#phone-home').focus(); }
@@ -230,6 +238,26 @@ function showGalleryImage(step = 0) {
 }
 document.addEventListener('click', e => { const c = e.target.closest('[data-gallery-step]'); if (c) showGalleryImage(Number(c.dataset.galleryStep)); });
 imageDialog.addEventListener('keydown', e => { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); showGalleryImage(e.key === 'ArrowLeft' ? -1 : 1); } });
+
+/* ---- Formulaire de contact ---- */
+document.addEventListener('submit', async e => {
+  const form = e.target.closest('[data-contact-form]'); if (!form) return;
+  e.preventDefault();
+  const C = T.contact, status = form.querySelector('.message-status'), button = form.querySelector('[type=submit]');
+  if (button.disabled || !form.reportValidity()) return;
+  if (form.elements.website.value) { status.textContent = C.stSpam; return; } // honeypot
+  const endpoint = data.contactEndpoint;
+  if (!endpoint) { status.textContent = C.stOff; return; }
+  let url; try { url = new URL(endpoint, location.href); if (url.protocol !== 'https:' && url.origin !== location.origin) throw 0; } catch { status.textContent = C.stBad; return; }
+  button.disabled = true; const label = button.innerHTML; button.textContent = C.stSending; status.textContent = '';
+  const ctrl = new AbortController(), to = setTimeout(() => ctrl.abort(), 15000);
+  try {
+    const r = await fetch(url.href, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ name: form.elements.name.value.trim(), email: form.elements.email.value.trim(), message: form.elements.message.value.trim() }), signal: ctrl.signal });
+    if (!r.ok) throw 0;
+    form.reset(); status.textContent = C.stOk;
+  } catch { status.textContent = C.stFail; }
+  finally { clearTimeout(to); button.disabled = false; button.innerHTML = label; }
+});
 
 /* ---- Analytics (chargé seulement si configuré, sans cookie) ---- */
 if (data.analytics) { const s = document.createElement('script'); s.async = true; s.dataset.goatcounter = data.analytics; s.src = 'https://gc.zgo.at/count.js'; document.body.appendChild(s); }

@@ -1,12 +1,11 @@
 // Source unique des données du portfolio — bilingue (fr/en).
-// Les champs traduisibles sont des objets {fr, en}. Renseigne linkedin/cv/analytics.
+// Les champs traduisibles sont des objets {fr, en}.
 window.portfolio = {
   name: 'Portfolio',
-  email: 'removed@example.invalid',
   github: 'https://github.com/Shok75',
-  linkedin: '', // ex: https://www.linkedin.com/in/ton-profil
-  cv: '',       // ex: assets/cv.pdf
-  analytics: '', // GoatCounter, ex: https://TONCODE.goatcounter.com/count (sans cookie, RGPD)
+  // Endpoint HTTPS du formulaire de contact (ex: service de formulaire).
+  // Laisser vide = le formulaire s'affiche mais l'envoi est désactivé.
+  contactEndpoint: '',
   availability: {
     fr: 'Recherche de stage · 4 mois ou plus à partir de mars',
     en: 'Seeking an internship · 4+ months from March'

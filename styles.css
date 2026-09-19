@@ -210,3 +210,38 @@ body[data-view=accueil] .hero{padding-right:310px;max-width:none}
 /* Sélecteur de langue */
 #lang-toggle{font-size:12px;font-weight:700;letter-spacing:1px;border:1px solid var(--line);border-radius:6px;padding:6px 11px;background:#0a1322cc;color:var(--ink);transition:.2s}
 #lang-toggle:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ---------- Formulaire de contact ---------- */
+.message-form{display:grid;gap:14px;max-width:640px;margin:26px 0 0;padding:24px;border:1px solid var(--line);
+  border-radius:14px;background:var(--panel)}
+.message-form-heading{display:flex;align-items:center;gap:14px}
+.message-form-heading span{width:44px;height:44px;flex-shrink:0;display:grid;place-items:center;border-radius:12px;
+  background:linear-gradient(140deg,#12293f,#0b1a2c);border:1px solid var(--line);color:var(--accent)}
+.message-form-heading span svg{width:22px;height:22px}
+.message-form-heading small{display:block;font-size:11px;letter-spacing:2px;color:var(--accent)}
+.message-form-heading h3{margin:2px 0 0;font-size:18px}
+.message-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.message-form label{display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:.5px;color:var(--muted);text-transform:uppercase}
+.message-form input,.message-form textarea{background:#0a1220;border:1px solid var(--line);border-radius:9px;color:var(--ink);
+  padding:11px 12px;font:15px/1.5 inherit;text-transform:none;letter-spacing:0}
+.message-form input:focus,.message-form textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+.message-form textarea{resize:vertical;min-height:120px}
+.message-trap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.message-privacy{margin:0;font-size:12px;color:var(--muted)}
+.message-send{justify-content:center;margin-top:2px}
+.message-status{margin:0;font-size:13px;color:var(--accent);min-height:1em}
+.message-setup{margin:0;font-size:12px;color:#ffcf9e}
+.contact-alternatives{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.contact-alternatives a{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--line);
+  border-radius:12px;background:var(--panel);transition:.2s;min-width:220px}
+.contact-alternatives a:hover{border-color:var(--accent);transform:translateY(-2px)}
+.contact-alternatives svg{width:24px;height:24px;color:var(--accent);flex-shrink:0}
+.contact-alternatives span{display:flex;flex-direction:column;font-weight:700;font-size:14px}
+.contact-alternatives small{font-weight:400;color:var(--muted);font-size:12px}
+/* Variante compacte (téléphone DEV.OS) */
+.message-form-compact{padding:0;border:0;background:transparent;margin-top:10px;gap:10px;max-width:none}
+.message-form-compact .message-fields{grid-template-columns:1fr}
+.message-form-compact .message-form-heading span{width:36px;height:36px}
+.message-form-compact .message-form-heading h3{font-size:15px}
+.message-form-compact input,.message-form-compact textarea{font-size:13px;padding:9px 10px}
+@media (max-width:640px){.message-fields{grid-template-columns:1fr}}

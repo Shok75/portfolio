@@ -48,9 +48,29 @@ dialog::backdrop{background:#050a13cc;backdrop-filter:blur(6px)}
 .dlg-head h3{margin:0;flex:1;font-size:15px}
 #outCode{width:100%;min-height:50vh;border:0;border-radius:0 0 14px 14px;background:#070c15;color:#cfe0ee;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:16px}
 small.hint{display:block;color:var(--dim);font-size:11px;margin-top:3px;text-transform:none;letter-spacing:0}
+#gate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#070c15;padding:20px}
+body.unlocked #gate{display:none}
+body:not(.unlocked) .wrap,body:not(.unlocked) .out,body:not(.unlocked) .top{filter:blur(6px);pointer-events:none}
+.gate-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px;max-width:360px;width:100%;display:grid;gap:12px;text-align:center}
+.gate-card h2{margin:0;font-size:20px}
+.gate-card p{margin:0;color:var(--dim);font-size:13px}
+.gate-err{color:#ff6b81;min-height:1em;font-size:13px}
+.linklike{background:none;border:0;color:var(--accent);cursor:pointer;font-size:12px;padding:4px}
+.gate-out{background:#070c15;border:1px solid var(--line);border-radius:8px;padding:10px;font:12px/1.4 ui-monospace,Menlo,monospace;color:#cfe0ee;white-space:pre-wrap;word-break:break-all;text-align:left;margin:0}
 </style>
 </head>
 <body>
+<div id="gate">
+  <form id="gate-form" class="gate-card">
+    <h2>🔒 Éditeur privé</h2>
+    <p>Accès réservé. Entre le mot de passe pour continuer.</p>
+    <input id="gate-pass" type="password" placeholder="Mot de passe" autocomplete="current-password">
+    <button class="primary" type="submit">Déverrouiller</button>
+    <p id="gate-err" class="gate-err"></p>
+    <button type="button" id="gate-change" class="linklike">Changer le mot de passe</button>
+    <pre id="gate-out" class="gate-out" hidden></pre>
+  </form>
+</div>
 <header class="top">
   <h1>Éditeur du portfolio</h1>
   <span class="badge">LOCAL · AUCUN COMPTE</span>
@@ -69,12 +89,8 @@ small.hint{display:block;color:var(--dim);font-size:11px;margin-top:3px;text-tra
   <fieldset>
     <legend>Coordonnées</legend>
     <div class="row">
-      <div><label>Email</label><input id="f-email"></div>
       <div><label>GitHub (URL)</label><input id="f-github"></div>
-    </div>
-    <div class="row">
-      <div><label>LinkedIn (URL)</label><input id="f-linkedin" placeholder="https://www.linkedin.com/in/…"></div>
-      <div><label>CV (chemin ou URL)</label><input id="f-cv" placeholder="assets/cv.pdf"></div>
+      <div><label>Endpoint du formulaire de contact</label><input id="f-endpoint" placeholder="https://… (vide = envoi désactivé)"><small class="hint">URL d'un service de formulaire ; laisser vide affiche « bientôt disponible ».</small></div>
     </div>
     <div class="bi">
       <div><label>Disponibilité <span class="tag">FR</span></label><input id="f-availfr"></div>
@@ -142,8 +158,7 @@ let P; // état de travail
 function loadFromWindow() {
   const src = JSON.parse(JSON.stringify(window.portfolio || {}));
   P = {
-    name: src.name || 'Portfolio', email: src.email || '', github: src.github || '',
-    linkedin: src.linkedin || '', cv: src.cv || '', analytics: src.analytics || '',
+    name: src.name || 'Portfolio', github: src.github || '', contactEndpoint: src.contactEndpoint || '',
     availability: bi(src.availability),
     skills: {
       languages: src.skills?.languages || [], technologies: src.skills?.technologies || [], tools: src.skills?.tools || []
@@ -170,7 +185,7 @@ function normProject(p) {
 
 /* ---- Champs simples ---- */
 function fillTop() {
-  $('#f-email').value = P.email; $('#f-github').value = P.github; $('#f-linkedin').value = P.linkedin; $('#f-cv').value = P.cv;
+  $('#f-github').value = P.github; $('#f-endpoint').value = P.contactEndpoint;
   $('#f-availfr').value = P.availability.fr; $('#f-availen').value = P.availability.en;
   $('#f-sk-languages').value = arrToStr(P.skills.languages);
   $('#f-sk-technologies').value = arrToStr(P.skills.technologies);
@@ -182,8 +197,7 @@ function fillTop() {
   $('#f-edu-tagsen').value = (P.education.tags.en || []).join(', ');
 }
 function readTop() {
-  P.email = $('#f-email').value.trim(); P.github = $('#f-github').value.trim();
-  P.linkedin = $('#f-linkedin').value.trim(); P.cv = $('#f-cv').value.trim();
+  P.github = $('#f-github').value.trim(); P.contactEndpoint = $('#f-endpoint').value.trim();
   P.availability = { fr: $('#f-availfr').value.trim(), en: $('#f-availen').value.trim() };
   P.skills.languages = strToArr($('#f-sk-languages').value);
   P.skills.technologies = strToArr($('#f-sk-technologies').value);
@@ -305,7 +319,23 @@ $('#generate').onclick = () => { $('#outCode').value = toDataJs(); $('#outDlg').
 $('#closeDlg').onclick = () => $('#outDlg').close();
 $('#copyBtn').onclick = async () => { try { await navigator.clipboard.writeText($('#outCode').value); $('#copyBtn').textContent = 'Copié ✓'; setTimeout(() => $('#copyBtn').textContent = 'Copier', 1500); } catch { $('#outCode').select(); document.execCommand('copy'); } };
 $('#downloadBtn').onclick = () => { const b = new Blob([$('#outCode').value], { type: 'text/javascript' }); const a = el('a'); a.href = URL.createObjectURL(b); a.download = 'data.js'; a.click(); URL.revokeObjectURL(a.href); };
-boot();
+
+/* ---- Verrou d'accès (mot de passe, côté client) ---- */
+const GATE_HASH = '0e6a8e0b849ed9b064c5a25e1ee5592f427e3eb9d250e42069ce46147d00e8d4'; // défaut: "portfolio" — À CHANGER via « Changer le mot de passe »
+async function sha256(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+function unlock(){document.body.classList.add('unlocked');boot();}
+$('#gate-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const h = await sha256($('#gate-pass').value);
+  if (h === GATE_HASH){ try{sessionStorage.setItem('ed-unlocked','1')}catch{} unlock(); }
+  else { $('#gate-err').textContent = 'Mot de passe incorrect.'; $('#gate-pass').select(); }
+});
+$('#gate-change').addEventListener('click', async () => {
+  const np = prompt('Nouveau mot de passe :'); if (!np) return;
+  const h = await sha256(np); const out = $('#gate-out'); out.hidden = false;
+  out.textContent = "Colle cette ligne à la place de GATE_HASH dans editor.html, puis commit :\n\nconst GATE_HASH = '" + h + "';";
+});
+try { if (sessionStorage.getItem('ed-unlocked') === '1') unlock(); } catch {}
 </script>
 </body>
 </html>
