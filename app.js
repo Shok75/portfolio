@@ -18,12 +18,6 @@ const tf = v => (v && typeof v === 'object' && !Array.isArray(v)) ? (v[lang] ?? 
 /* ---- Icônes ---- */
 const uiIcons = { accueil: "M3 11 12 3l9 8v10h-6v-7H9v7H3z", profil: "M12 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10M3 22v-3a9 6 0 0 1 18 0v3z", projets: "M2 5h8l2 3h10v13H2zM2 3h8l2 2H2z", competences: "M3 14h4v8H3zM10 8h4v14h-4zM17 2h4v20h-4z", parcours: "M8 2h8v4h6v16H2V6h6zm2 2v2h4V4zM2 11v2h20v-2z", galerie: "M2 3h20v18H2zm3 3v12h14l-5-7-4 5-2-3-3 4zm3 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4", contact: "M2 4h20L12 13zM2 7l10 9L22 7v14H2z" };
 const uiIcon = id => '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="' + uiIcons[id] + '"/></svg>';
-const featIcons = { explor: 'M12 2 8 12l4-2 4 2z M12 22l4-10-4 2-4-2z', combat: 'M14.5 4 20 4l0 5.5-8.5 8.5-2-2zM4 14l6 6-2 2-6-6z M9.5 4 4 4l0 5.5 8.5 8.5 2-2z', invent: 'M5 8h14v12H5zM9 8V6a3 3 0 0 1 6 0v2', clock: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18M12 8v4l3 2', wallet: 'M3 7h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3zM3 7l0-2h13M17 13h.01', chart: 'M4 20V10M10 20V4M16 20v-7M22 20H2', users: 'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M2 21a7 7 0 0 1 14 0M17 11a4 4 0 0 0 0-8M18 21a7 7 0 0 0-3-5.7', shield: 'M12 3 4 6v6c0 5 3.5 7.5 8 9 4.5-1.5 8-4 8-9V6z', box: 'M4 5h16v15H4zM4 10h16' };
-function featureIcon(t) {
-  const s = t.toLowerCase();
-  const k = /explor|monde|world|environ/.test(s) ? 'explor' : /combat|attaqu|arme|weapon/.test(s) ? 'combat' : /invent|craft|objet|item/.test(s) ? 'invent' : /temps|réel|real-?time/.test(s) ? 'clock' : /paiement|payment|solde|balance|transaction/.test(s) ? 'wallet' : /statist|graph|chart|dashboard|tableau/.test(s) ? 'chart' : /associ|multi|utilisateur|user|rôle|role|tenant/.test(s) ? 'users' : /sécur|secur|isolation/.test(s) ? 'shield' : 'box';
-  return '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="' + featIcons[k] + '"/></svg>';
-}
 
 /* ---- Sections & état ---- */
 const sectionIds = ['accueil', 'profil', 'projets', 'competences', 'parcours', 'contact', 'galerie'];
@@ -36,7 +30,6 @@ const stateCss = st => ({ 'in-progress': 'en-cours', 'done': 'termine', 'upcomin
 const projectContext = p => p.state === 'upcoming' ? T.context.upcoming : (T.context[p.context] || '');
 const skillFiles = { 'Java': 'java', 'JavaFX': 'java', 'PHP': 'php', 'Python': 'python', 'JavaScript': 'javascript', 'HTML': 'html5', 'CSS': 'css3', 'C': 'c', 'Bash / Unix': 'bash', 'MySQL': 'mysql', 'PostgreSQL': 'postgresql', 'MongoDB': 'mongodb', 'Git': 'git', 'Maven': 'maven', 'IntelliJ': 'intellij', 'PyCharm': 'pycharm', 'PHPStorm': 'phpstorm', 'Linux': 'linux' };
 const skillLogo = name => '<img class="technology-logo" src="assets/logos/' + skillFiles[name] + '.svg" alt="" width="32" height="32" loading="lazy">';
-function techItem(n) { const name = tf(n); const f = skillFiles[name]; return '<li>' + (f ? '<img src="assets/logos/' + f + '.svg" alt="" width="22" height="22" loading="lazy">' : '<span class="pd-tech-ph">' + esc(name[0]) + '</span>') + '<span>' + esc(name) + '</span></li>'; }
 function gallery(p) { return '<div class="gallery-grid">' + p.images.map(([file, label]) => '<button class="gallery-shot" data-image="assets/' + file + '.webp" data-caption="' + esc(tf(label)) + '"><img src="assets/' + file + '.webp" alt="' + esc(tf(label)) + '" loading="lazy"><span>' + esc(tf(label)) + '</span></button>').join('') + '</div>'; }
 function contactForm(compact) {
   const C = T.contact, prefix = compact ? 'phone-message' : 'contact-message';
@@ -76,7 +69,17 @@ const views = {
   profil: () => '<div class="section-index">' + esc(T.profil.index) + '</div><h1>' + esc(T.profil.h1) + '</h1><div class="about-grid"><div class="panel"><h3>' + T.profil.panelH3 + '</h3><p>' + esc(T.profil.p1) + '</p><p>' + esc(T.profil.p2) + '</p><p>' + esc(T.profil.p3) + '</p>' + tags(T.profil.tags) + '</div><div class="panel profile-data"><div><small>' + esc(T.profil.fEducation) + '</small>' + esc(T.profil.vEducation) + '</div><div><small>' + esc(T.profil.fTrack) + '</small>' + esc(T.profil.vTrack) + '</div><div><small>' + esc(T.profil.fLocation) + '</small>' + esc(T.profil.vLocation) + '</div><div><small>' + esc(T.profil.fAvailability) + '</small>' + esc(tf(data.availability)) + '</div></div></div>',
   projets: () => '<div class="section-index">' + esc(T.projets.index) + '</div><h1>' + esc(T.projets.h1) + '</h1><p class="intro">' + esc(T.projets.intro) + '</p>' + projectGroups(),
   competences: () => '<div class="section-index">' + esc(T.competences.index) + '</div><h1>' + T.competences.h1 + '</h1>' + Object.entries(data.skills).map(([cat, items]) => '<section class="skill-group"><h3>' + esc(T.skillCat[cat]) + '</h3><div class="skills-grid">' + items.map(x => '<div class="skill">' + skillLogo(x) + '<span>' + esc(x) + '</span></div>').join('') + '</div></section>').join(''),
-  parcours: () => '<div class="section-index">' + esc(T.parcours.index) + '</div><h1>' + T.parcours.h1 + '</h1><p class="intro">' + esc(T.parcours.intro) + '</p><article class="formation-card"><div class="formation-icon">' + uiIcon('competences') + '</div><div><span class="eyebrow">' + esc(T.parcours.eduEyebrow) + ' · ' + esc(data.education.period) + '</span><h2>' + esc(tf(data.education.title)) + '</h2><p>' + esc(tf(data.education.description)) + '</p>' + tags(tf(data.education.tags)) + '</div></article><h2 class="journey-title">' + esc(T.parcours.journeyTitle) + '</h2><p class="journey-hint">' + esc(T.parcours.journeyHint) + '</p><div class="project-journal">' + data.projects.filter(p => p.state !== 'upcoming').slice().sort((a, b) => Number(b.year) - Number(a.year)).map(p => '<details class="journal-entry"><summary><span class="journal-year">' + esc(p.year) + '</span><span class="journal-heading"><small>' + esc(projectContext(p)) + '</small><strong>' + esc(tf(p.name)) + '</strong></span><span class="journal-plus" aria-hidden="true">+</span></summary><div class="journal-body"><p>' + esc(tf(p.description)) + '</p>' + tags(p.tech) + '<h3>' + esc(T.parcours.delivers) + '</h3><ul>' + p.features.map(([title, d]) => '<li><strong>' + esc(tf(title)) + '</strong><span>' + esc(tf(d)) + '</span></li>').join('') + '</ul><h3>' + esc(T.parcours.devChallenges) + '</h3><p>' + p.challenges.map(([title]) => esc(tf(title))).join(' · ') + '</p><button class="btn secondary" data-project="' + esc(p.id) + '">' + T.common.explore + '</button></div></details>').join('') + '</div>',
+  parcours: () => {
+    const P2 = T.parcours, ed = data.education;
+    const journal = data.projects.filter(p => p.state !== 'upcoming').slice().sort((a, b) => Number(b.year) - Number(a.year)).map(p => '<details class="journal-entry"><summary><span class="journal-year">' + esc(p.year) + '</span><span class="journal-heading"><small>' + esc(projectContext(p)) + '</small><strong>' + esc(tf(p.name)) + '</strong></span><span class="journal-plus" aria-hidden="true">+</span></summary><div class="journal-body"><p>' + esc(tf(p.description)) + '</p>' + tags(p.tech) + '<h3>' + esc(P2.delivers) + '</h3><ul>' + p.features.map(([t2, d]) => '<li><strong>' + esc(tf(t2)) + '</strong><span>' + esc(tf(d)) + '</span></li>').join('') + '</ul><h3>' + esc(P2.devChallenges) + '</h3><p>' + p.challenges.map(([t2]) => esc(tf(t2))).join(' · ') + '</p><button class="btn secondary" data-project="' + esc(p.id) + '">' + esc(T.common.explore) + '</button></div></details>').join('');
+    return '<div class="section-index">' + esc(P2.index) + '</div><div class="journey-intro"><h1>' + esc(P2.h1) + '</h1><p class="intro">' + esc(P2.intro) + '</p></div>'
+      + '<section class="learning-card"><div class="learning-heading"><span class="learning-symbol">' + uiIcon('competences') + '</span><div><div class="eyebrow">' + esc(ed.period) + ' · ' + esc(P2.eduTag) + '</div><h2>' + esc(tf(ed.title)) + '</h2><p>' + esc(P2.track) + '</p></div><span class="learning-current">' + esc(P2.currentYear) + '</span></div>'
+      + '<ol class="learning-years">' + P2.years.map(([yr, lbl], i) => '<li' + (i === P2.years.length - 1 ? ' aria-current="step"' : '') + '><span>0' + (i + 1) + '</span><strong>' + esc(yr) + '</strong><small>' + esc(lbl) + '</small></li>').join('') + '</ol>'
+      + '<div class="learning-domains">' + tags(P2.domains) + '</div></section>'
+      + '<div class="journey-section-heading"><div><span class="eyebrow">' + esc(P2.practiceEyebrow) + '</span><h2>' + esc(P2.practiceTitle) + '</h2></div><span class="journey-count">' + esc(P2.practiceCount) + '</span></div>'
+      + '<p class="journey-hint">' + esc(P2.journeyHint) + '</p><div class="project-journal">' + journal + '</div>'
+      + '<section class="next-mission"><span class="next-mission-icon">' + uiIcon('parcours') + '</span><div><span class="eyebrow">' + esc(P2.nextEyebrow) + '</span><h2>' + esc(P2.nextTitle) + '</h2><p>' + P2.nextText + '</p></div><a class="btn" href="#contact">' + esc(P2.nextCta) + '</a></section>';
+  },
   contact: () => '<div class="section-index">' + esc(T.contact.index) + '</div><h1>' + esc(T.contact.h1) + '</h1><p class="intro">' + esc(T.contact.intro) + '</p>' + contactForm(false) + (data.github ? '<div class="contact-alternatives"><a href="' + esc(data.github) + '" target="_blank" rel="noopener noreferrer">' + uiIcon('projets') + '<span>' + esc(T.contact.ghLabel) + '<small>' + esc(T.contact.ghAlt) + '</small></span></a></div>' : ''),
   galerie: () => '<div class="section-index">' + esc(T.galerie.index) + '</div><h1>' + esc(T.galerie.h1) + '</h1>' + data.projects.filter(p => p.images.length).map(p => '<h3>' + esc(tf(p.name)) + '</h3>' + gallery(p)).join('')
 };
@@ -115,34 +118,46 @@ function phoneApp(id) {
   if (id === 'projets') c = '<h3>' + esc(V.myProjects) + '</h3>' + data.projects.filter(p => p.state !== 'upcoming').map(p => '<button class="phone-item" data-project="' + p.id + '">' + esc(tf(p.name)) + ' ↗</button>').join('');
   else if (id === 'profil') c = '<h3>' + esc(V.myProfile) + '</h3><p>' + V.profileLine + '</p><p>' + esc(V.internship) + '</p><a class="phone-item" href="#profil">' + esc(V.fullProfile) + '</a>';
   else if (id === 'competences') c = '<h3>' + esc(V.techs) + '</h3><div class="phone-tags">' + Object.values(data.skills).flat().map(x => '<span>' + skillLogo(x) + esc(x) + '</span>').join('') + '</div>';
-  else if (id === 'parcours') c = '<h3>' + esc(V.myJourney) + '</h3><p>' + V.journeyLine + '</p><a class="phone-item" href="#parcours">' + esc(V.discoverJourney) + '</a>';
+  else if (id === 'parcours') c = '<h3>' + esc(V.myJourney) + '</h3>' + V.journeySteps.map(([a, b, d]) => '<div class="phone-journey-step"><small>' + esc(a) + '</small><strong>' + esc(b) + '</strong><span>' + esc(d) + '</span></div>').join('') + '<a class="phone-item" href="#parcours">' + esc(V.discoverJourney) + '</a>';
   else if (id === 'galerie') c = '<h3>' + esc(V.gallery) + '</h3>' + data.projects.filter(p => p.images.length).map(p => '<p>' + esc(tf(p.name)) + '</p>' + gallery(p)).join('');
   else c = contactForm(true);
   $('#phone-content').innerHTML = '<div class="phone-body"><button class="phone-back" data-home>← ' + esc(T.phone.back) + '</button>' + c + '</div>';
 }
 function togglePhone(force) { const show = force ?? $('#phone').classList.contains('hidden'); $('#phone').classList.toggle('hidden', !show); $('#phone').inert = !show; $('#phone-toggle').setAttribute('aria-expanded', String(show)); if (show) $('#phone-home').focus(); }
 
-/* ---- Pop-up projet ---- */
-let trigger, pdImages = [], pdIndex = 0;
-function pdShow(i) {
-  if (!pdImages.length) return; pdIndex = (i + pdImages.length) % pdImages.length;
-  const [file, label] = pdImages[pdIndex], cap = tf(label), img = $('#pd-hero-img');
-  if (img) { img.src = 'assets/' + file + '.webp'; img.alt = cap; img.dataset.image = 'assets/' + file + '.webp'; img.dataset.caption = cap; }
-  const c = $('#pd-hero-cap'); if (c) c.textContent = cap;
-  document.querySelectorAll('#pd-thumbs .pd-thumb').forEach((b, j) => b.classList.toggle('active', j === pdIndex));
-  const act = document.querySelector('#pd-thumbs .pd-thumb.active'); if (act) act.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-}
+/* ---- Pop-up projet — dossier de mission (onglets) ---- */
+let trigger, dossierProject = null, dossierIndex = 0;
+const dossierFeatIcons = ['accueil', 'competences', 'projets', 'parcours'];
 function openProject(id) {
-  const p = data.projects.find(p => p.id === id); if (!p || p.state === 'upcoming') return;
-  trigger = document.activeElement; beep(); pdImages = p.images || []; pdIndex = 0;
-  const cls = stateCss(p.state), ctx = projectContext(p), D = T.dialog;
-  const hero = pdImages.length ? '<figure class="pd-hero"><img id="pd-hero-img" src="assets/' + esc(pdImages[0][0]) + '.webp" alt="' + esc(tf(pdImages[0][1])) + '" data-image="assets/' + esc(pdImages[0][0]) + '.webp" data-caption="' + esc(tf(pdImages[0][1])) + '"><figcaption id="pd-hero-cap">' + esc(tf(pdImages[0][1])) + '</figcaption><span class="pd-hero-zoom" aria-hidden="true">⤢</span></figure>' + (pdImages.length > 1 ? '<div class="pd-carousel"><button class="pd-arrow" data-pd-step="-1" aria-label="◄">‹</button><div class="pd-thumbs" id="pd-thumbs">' + pdImages.map((im, i) => '<button class="pd-thumb' + (i ? '' : ' active') + '" data-pd-thumb="' + i + '" aria-label="' + esc(tf(im[1])) + '"><img src="assets/' + esc(im[0]) + '.webp" alt="" loading="lazy"></button>').join('') + '</div><button class="pd-arrow" data-pd-step="1" aria-label="►">›</button></div>' : '') : '';
-  const feats = p.features.length ? '<div class="pd-section-title">' + esc(D.features) + '</div><div class="pd-features">' + p.features.map(([n, t]) => '<div class="pd-feat"><span class="pd-feat-ic">' + featureIcon(tf(n)) + '</span><div><strong>' + esc(tf(n)) + '</strong><span>' + esc(tf(t)) + '</span></div></div>').join('') + '</div>' : '';
-  const chal = p.challenges.length ? '<div class="pd-section-title">' + esc(D.challenges) + '</div><ul class="pd-challenges">' + p.challenges.map(([n, t]) => '<li><strong>' + esc(tf(n)) + '</strong><span>' + esc(tf(t)) + '</span></li>').join('') + '</ul>' : '';
-  const roles = p.roles ? '<div class="pd-section-title">' + esc(D.roles) + '</div><div class="pd-roles">' + p.roles.map(([n, t]) => '<div class="pd-role"><strong>' + esc(tf(n)) + '</strong><span>' + esc(tf(t)) + '</span></div>').join('') + '</div>' : '';
-  const rail = '<aside class="pd-rail"><div class="pd-rail-card"><h4>' + esc(D.technologies) + '</h4><ul class="pd-tech">' + p.tech.map(techItem).join('') + '</ul></div><div class="pd-rail-card pd-meta"><div><small>' + esc(D.type) + '</small><span>' + esc(ctx) + '</span></div>' + (p.year ? '<div><small>' + esc(D.year) + '</small><span>' + esc(p.year) + '</span></div>' : '') + '<div><small>' + esc(D.status) + '</small><span class="pd-dot ' + cls + '">' + esc(T.status[p.state]) + '</span></div></div>' + (p.github ? '<a class="pd-github" href="' + esc(p.github) + '" target="_blank" rel="noopener noreferrer">' + esc(D.viewGithub) + ' <span aria-hidden="true">›</span></a>' : '') + '<button class="pd-back" data-close>' + esc(T.common.backToMissions) + '</button></aside>';
-  $('#project-content').innerHTML = '<div class="pd"><div class="pd-eyebrow">' + esc(D.eyebrow) + '</div><div class="pd-titlerow"><h2 class="pd-title">' + esc(tf(p.name)) + '</h2><span class="pd-sub">' + esc(ctx) + (p.year ? ' · ' + esc(p.year) : '') + '</span><span class="pd-badge ' + cls + '">' + esc(T.status[p.state]) + '</span></div><div class="pd-grid"><div class="pd-main">' + hero + '<p class="pd-desc">' + esc(tf(p.description)) + '</p>' + feats + chal + roles + '</div>' + rail + '</div><div class="pd-foot"><span>' + esc(D.foot) + '</span><span>v0.1.0</span></div></div>';
-  $('#project-dialog').showModal();
+  const p = data.projects.find(x => x.id === id); if (!p || p.state === 'upcoming') return;
+  trigger = document.activeElement; dossierProject = p; dossierIndex = 0; beep();
+  const D = T.dialog, dlg = $('#project-dialog'), cls = stateCss(p.state), ctx = projectContext(p);
+  const n = String(data.projects.indexOf(p) + 1).padStart(2, '0'), imgs = p.images || [];
+  const [f0, l0] = imgs.length ? imgs[0] : ['', ''];
+  const header = '<header class="dossier-header"><div><div class="eyebrow">' + esc(D.eyebrow) + ' / ' + n + '</div><h2 id="dossier-title">' + esc(tf(p.name)) + '</h2><p>' + esc(ctx) + (p.year ? ' <span>·</span> ' + esc(p.year) : '') + '</p></div><span class="dossier-status ' + cls + '">' + esc(T.status[p.state]) + '</span></header>';
+  const media = imgs.length ? '<section class="dossier-media" aria-label="' + esc(D.capturesTitle) + '"><div class="dossier-stage"><img id="dossier-image" src="assets/' + esc(f0) + '.webp" alt="' + esc(tf(l0)) + '"><div class="dossier-image-shade"></div><span class="dossier-screen-label">' + esc(D.onField) + '</span><div class="dossier-caption"><span id="dossier-caption">' + esc(tf(l0)) + '</span><span id="dossier-count" aria-live="polite">1 / ' + imgs.length + '</span></div>' + (imgs.length > 1 ? '<button class="dossier-arrow previous" data-dossier-step="-1" aria-label="◄">‹</button><button class="dossier-arrow next" data-dossier-step="1" aria-label="►">›</button>' : '') + '</div>' + (imgs.length > 1 ? '<div class="dossier-thumbnails">' + imgs.map(([file, label], i) => '<button data-dossier-image="' + i + '" aria-label="' + esc(tf(label)) + '" aria-pressed="' + (i === 0) + '"><img src="assets/' + esc(file) + '.webp" alt="" loading="lazy"><span>' + String(i + 1).padStart(2, '0') + '</span></button>').join('') + '</div>' : '') + '</section>' : '';
+  const tabDefs = [['overview', D.tabOverview], ['technical', D.tabTechnical]];
+  if (imgs.length) tabDefs.push(['gallery', D.tabGallery]);
+  const tabs = '<div class="dossier-tabs" role="tablist" aria-label="' + esc(tf(p.name)) + '">' + tabDefs.map(([key, label], i) => '<button id="dossier-tab-' + key + '" role="tab" aria-selected="' + (i === 0) + '" aria-controls="dossier-panel-' + key + '" tabindex="' + (i === 0 ? 0 : -1) + '" data-dossier-tab="' + key + '">' + esc(label) + '</button>').join('') + '</div>';
+  const overview = '<section id="dossier-panel-overview" role="tabpanel" aria-labelledby="dossier-tab-overview" tabindex="0"><p class="dossier-description">' + esc(tf(p.description)) + '</p><div class="dossier-features">' + p.features.map(([t2, d], i) => '<article class="dossier-feature"><span class="feature-symbol">' + uiIcon(dossierFeatIcons[i % 4]) + '</span><div><h3>' + esc(tf(t2)) + '</h3><p>' + esc(tf(d)) + '</p></div></article>').join('') + '</div></section>';
+  const technical = '<section id="dossier-panel-technical" role="tabpanel" aria-labelledby="dossier-tab-technical" tabindex="0" hidden><div class="eyebrow">' + esc(D.techChoices) + '</div>' + p.challenges.map(([t2, d], i) => '<article class="technical-entry"><span>' + String(i + 1).padStart(2, '0') + '</span><div><h3>' + esc(tf(t2)) + '</h3><p>' + esc(tf(d)) + '</p></div></article>').join('') + (p.roles ? '<h3 class="dossier-role-title">' + esc(D.roles) + '</h3>' + p.roles.map(([t2, d]) => '<details class="dossier-role"><summary>' + esc(tf(t2)) + '</summary><p>' + esc(tf(d)) + '</p></details>').join('') : '') + '</section>';
+  const galleryPanel = imgs.length ? '<section id="dossier-panel-gallery" role="tabpanel" aria-labelledby="dossier-tab-gallery" tabindex="0" hidden><div class="eyebrow">' + esc(D.capturesTitle) + '</div>' + gallery(p) + '</section>' : '';
+  const facts = '<aside class="dossier-facts"><small>' + esc(D.technologies) + '</small><div class="dossier-tech">' + p.tech.map(name => { const nm = tf(name); return '<span>' + (skillFiles[nm] ? skillLogo(nm) : uiIcon('competences')) + esc(nm) + '</span>'; }).join('') + '</div><small>' + esc(D.type) + '</small><p>' + esc(ctx) + '</p>' + (p.year ? '<small>' + esc(D.year) + '</small><p>' + esc(p.year) + '</p>' : '') + '<small>' + esc(D.status) + '</small><p class="fact-status ' + cls + '">' + esc(T.status[p.state]) + '</p></aside>';
+  const footer = '<footer class="dossier-footer"><span>' + esc(D.footer) + '</span>' + (p.github ? '<a class="btn" href="' + esc(p.github) + '" target="_blank" rel="noopener noreferrer">' + esc(T.common.viewGithub) + ' ↗</a>' : '') + '<button class="btn secondary" data-close>' + esc(T.common.backToMissions) + '</button></footer>';
+  $('#project-content').innerHTML = header + media + tabs + '<div class="dossier-layout"><div class="dossier-panels">' + overview + technical + galleryPanel + '</div>' + facts + '</div>' + footer;
+  if (!dlg.open) dlg.showModal(); dlg.scrollTop = 0;
+}
+function showDossierImage(index) {
+  if (!dossierProject || !dossierProject.images.length) return;
+  dossierIndex = (index + dossierProject.images.length) % dossierProject.images.length;
+  const [file, label] = dossierProject.images[dossierIndex], cap = tf(label), img = $('#dossier-image');
+  if (img) { img.src = 'assets/' + file + '.webp'; img.alt = cap; }
+  const c = $('#dossier-caption'); if (c) c.textContent = cap;
+  const ct = $('#dossier-count'); if (ct) ct.textContent = (dossierIndex + 1) + ' / ' + dossierProject.images.length;
+  document.querySelectorAll('[data-dossier-image]').forEach((b, i) => b.setAttribute('aria-pressed', String(i === dossierIndex)));
+}
+function selectDossierTab(key, focus) {
+  document.querySelectorAll('[data-dossier-tab]').forEach(b => { const active = b.dataset.dossierTab === key; b.setAttribute('aria-selected', String(active)); b.tabIndex = active ? 0 : -1; const panel = $('#dossier-panel-' + b.dataset.dossierTab); if (panel) panel.hidden = !active; if (active && focus) b.focus(); });
 }
 
 /* ---- Son / notifications ---- */
@@ -204,8 +219,6 @@ window.addEventListener('hashchange', () => { render(); beep(); });
 document.addEventListener('click', e => {
   const shot = e.target.closest('[data-image]');
   if (shot) { const grid = shot.closest('.gallery-grid'); activeShots = grid ? [...grid.querySelectorAll('[data-image]')] : [shot]; activeShot = Math.max(0, activeShots.indexOf(shot)); showGalleryImage(); $('#image-dialog').showModal(); }
-  const th = e.target.closest('[data-pd-thumb]'); if (th) pdShow(Number(th.dataset.pdThumb));
-  const st = e.target.closest('[data-pd-step]'); if (st) pdShow(pdIndex + Number(st.dataset.pdStep));
   const project = e.target.closest('[data-project]'); if (project) openProject(project.dataset.project);
   const marker = e.target.closest('button[data-section]'); if (marker) location.hash = marker.dataset.section;
   const app = e.target.closest('[data-app]'); if (app) phoneApp(app.dataset.app);
@@ -213,6 +226,23 @@ document.addEventListener('click', e => {
   if (e.target.closest('[data-close]')) $('#project-dialog').close();
   if (e.target.closest('.dialog-close')) e.target.closest('dialog').close();
   const link = e.target.closest('.phone a'); if (link && innerWidth < 768) togglePhone(false);
+});
+$('#project-dialog').addEventListener('click', e => {
+  const step = e.target.closest('[data-dossier-step]'); if (step) showDossierImage(dossierIndex + Number(step.dataset.dossierStep));
+  const image = e.target.closest('[data-dossier-image]'); if (image) showDossierImage(Number(image.dataset.dossierImage));
+  const tab = e.target.closest('[data-dossier-tab]'); if (tab) selectDossierTab(tab.dataset.dossierTab);
+});
+$('#project-dialog').addEventListener('keydown', e => {
+  const tab = e.target.closest('[data-dossier-tab]');
+  if (tab && ['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) {
+    e.preventDefault();
+    const keys = [...document.querySelectorAll('[data-dossier-tab]')].map(b => b.dataset.dossierTab);
+    const i = keys.indexOf(tab.dataset.dossierTab);
+    const next = e.key === 'Home' ? keys[0] : e.key === 'End' ? keys[keys.length - 1] : keys[(i + (e.key === 'ArrowRight' ? 1 : keys.length - 1)) % keys.length];
+    selectDossierTab(next, true);
+  } else if (e.target.closest('.dossier-media') && ['ArrowLeft', 'ArrowRight'].includes(e.key)) {
+    e.preventDefault(); showDossierImage(dossierIndex + (e.key === 'ArrowRight' ? 1 : -1));
+  }
 });
 $('#project-dialog').addEventListener('close', () => trigger?.focus());
 document.querySelectorAll('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) { const r = d.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) d.close(); } }));

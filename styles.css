@@ -93,118 +93,147 @@ body[data-view=accueil] .hero{padding-right:310px;max-width:none}
    et maquette 2 (héro immersif + carrousel). Chargé après reference.css.
    ========================================================================== */
 #project-dialog{max-width:1080px;width:calc(100% - 28px);padding:0;border:1px solid #7895ad55;
-  background:linear-gradient(180deg,#0c1626,#080d17);overflow:hidden}
+  background:linear-gradient(180deg,#0c1626,#080d17);overflow:auto}
 #project-dialog .dialog-close{position:absolute;right:14px;top:12px;width:38px;height:38px;border-radius:10px;
   display:grid;place-items:center;background:#0a121fcc;border:1px solid #ffffff1f;font-size:22px;z-index:5;line-height:1}
 #project-dialog .dialog-close:hover{border-color:var(--accent);color:var(--accent)}
 
-.pd{padding:30px 32px 22px;font-size:14px}
-.pd-eyebrow{font-size:11px;letter-spacing:3px;color:var(--accent);font-weight:700;margin-bottom:10px;
-  display:flex;align-items:center;gap:8px}
-.pd-eyebrow::before{content:"";width:14px;height:14px;border-left:3px solid var(--accent);border-top:3px solid var(--accent)}
-.pd-titlerow{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 16px;margin-bottom:22px;
-  padding-bottom:18px;border-bottom:1px solid #ffffff14}
-.pd-title{font-family:Impact,'Arial Narrow',Arial,sans-serif;font-weight:400;letter-spacing:1px;
-  text-transform:uppercase;font-size:clamp(26px,3.4vw,40px);line-height:1;margin:0}
-.pd-sub{color:#aeb8c6;font-size:13px}
-.pd-badge{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:1px;padding:5px 12px;border-radius:20px;
-  border:1px solid #ffffff2a;background:#0a121f;white-space:nowrap;display:inline-flex;align-items:center;gap:7px}
-.pd-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:#9aa7c0}
-.pd-badge.en-cours::before{background:#ff9d5c;box-shadow:0 0 8px #ff9d5c}
-.pd-badge.termine::before{background:#35e08a;box-shadow:0 0 8px #35e08a}
+/* ==========================================================================
+   Pop-up projet "dossier de mission" — onglets Aperçu / Technique / Galerie.
+   ========================================================================== */
+.dossier-header{display:flex;align-items:flex-start;gap:16px;padding:30px 32px 20px;border-bottom:1px solid #ffffff14}
+.dossier-header .eyebrow{font-size:11px;letter-spacing:3px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.dossier-header .eyebrow::before{content:"";width:14px;height:14px;border-left:3px solid var(--accent);border-top:3px solid var(--accent)}
+.dossier-header h2{font-family:Impact,'Arial Narrow',Arial,sans-serif;font-weight:400;letter-spacing:1px;text-transform:uppercase;font-size:clamp(26px,3.4vw,40px);line-height:1;margin:0 0 6px}
+.dossier-header p{margin:0;color:#aeb8c6;font-size:13px}
+.dossier-header p span{color:#5f6d80}
+.dossier-status{margin-left:auto;flex-shrink:0;font-size:11px;font-weight:700;letter-spacing:1px;padding:6px 13px;border-radius:20px;border:1px solid #ffffff2a;background:#0a121f;white-space:nowrap;display:inline-flex;align-items:center;gap:7px}
+.dossier-status::before{content:"";width:7px;height:7px;border-radius:50%;background:#9aa7c0}
+.dossier-status.en-cours::before{background:#ff9d5c;box-shadow:0 0 8px #ff9d5c}
+.dossier-status.termine::before{background:#35e08a;box-shadow:0 0 8px #35e08a}
 
-.pd-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:26px;align-items:start}
-.pd-main{min-width:0}
+.dossier-media{padding:22px 32px 0}
+.dossier-stage{position:relative;border-radius:14px;overflow:hidden;border:1px solid #ffffff1a;aspect-ratio:16/9;background:#0a1220}
+.dossier-stage img{width:100%;height:100%;object-fit:cover;display:block}
+.dossier-image-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,#060a12d9,transparent 45%)}
+.dossier-screen-label{position:absolute;left:16px;top:14px;z-index:2;font-size:10px;letter-spacing:2px;font-weight:700;color:#cfe0ee;background:#0a121fcc;border:1px solid #ffffff26;padding:5px 10px;border-radius:20px}
+.dossier-caption{position:absolute;left:16px;right:16px;bottom:14px;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;text-shadow:0 2px 12px #000}
+.dossier-caption>span:first-child{font-family:Impact,'Arial Narrow',sans-serif;letter-spacing:1px;text-transform:uppercase;font-size:15px;color:#eef3fb}
+#dossier-count{font-family:'Courier New',monospace;font-size:12px;color:#cdd8e6;background:#0a121fb0;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.dossier-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:40px;height:40px;border-radius:50%;background:#0a121fcc;border:1px solid #ffffff26;font-size:22px;color:#e7f0fa;display:grid;place-items:center;line-height:1}
+.dossier-arrow:hover{border-color:var(--accent);color:var(--accent)}
+.dossier-arrow.previous{left:12px}
+.dossier-arrow.next{right:12px}
+.dossier-thumbnails{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;padding:12px 0 2px}
+.dossier-thumbnails button{position:relative;flex:0 0 auto;width:96px;height:58px;border-radius:9px;overflow:hidden;padding:0;border:2px solid transparent;opacity:.55;transition:.2s}
+.dossier-thumbnails button img{width:100%;height:100%;object-fit:cover}
+.dossier-thumbnails button span{position:absolute;left:5px;bottom:4px;font:700 10px/1 'Courier New',monospace;color:#dbe6f2;text-shadow:0 1px 4px #000}
+.dossier-thumbnails button:hover{opacity:1}
+.dossier-thumbnails button[aria-pressed=true]{opacity:1;border-color:var(--accent);box-shadow:0 0 0 3px #76cfff33}
 
-/* Héro immersif (maquette 2) */
-.pd-hero{position:relative;margin:0 0 12px;border-radius:14px;overflow:hidden;border:1px solid #ffffff1a;
-  aspect-ratio:16/9;background:#0a1220}
-.pd-hero img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;transition:transform .5s var(--ease,ease)}
-.pd-hero:hover img{transform:scale(1.03)}
-.pd-hero::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(0deg,#060a12cc,transparent 45%)}
-.pd-hero figcaption{position:absolute;left:16px;bottom:14px;z-index:2;font-family:Impact,'Arial Narrow',sans-serif;
-  letter-spacing:1px;text-transform:uppercase;font-size:15px;color:#eef3fb;text-shadow:0 2px 12px #000}
-.pd-hero-zoom{position:absolute;right:12px;top:12px;z-index:2;width:32px;height:32px;border-radius:9px;
-  display:grid;place-items:center;background:#0a121fcc;border:1px solid #ffffff26;font-size:15px;color:#cfe0ee}
+.dossier-tabs{display:flex;gap:6px;padding:20px 32px 0;flex-wrap:wrap}
+.dossier-tabs button{padding:10px 18px;border-radius:10px 10px 0 0;background:transparent;border:1px solid transparent;border-bottom:2px solid transparent;font-size:13px;font-weight:700;letter-spacing:.5px;color:#9fb0c4;transition:.2s}
+.dossier-tabs button:hover{color:#e7f0fa}
+.dossier-tabs button[aria-selected=true]{color:#fff;border-color:#ffffff14;border-bottom-color:var(--accent);background:#0b1524}
 
-/* Carrousel de miniatures */
-.pd-carousel{display:flex;align-items:center;gap:8px;margin-bottom:20px}
-.pd-arrow{width:34px;height:52px;flex-shrink:0;border-radius:9px;background:#0c1524;border:1px solid #ffffff1f;
-  font-size:20px;color:#cfe0ee;display:grid;place-items:center}
-.pd-arrow:hover{border-color:var(--accent);color:var(--accent)}
-.pd-thumbs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;padding:2px}
-.pd-thumb{flex:0 0 auto;width:92px;height:56px;border-radius:9px;overflow:hidden;padding:0;
-  border:2px solid transparent;opacity:.6;transition:.2s}
-.pd-thumb img{width:100%;height:100%;object-fit:cover}
-.pd-thumb:hover{opacity:1}
-.pd-thumb.active{opacity:1;border-color:var(--accent);box-shadow:0 0 0 3px #83d9f033}
+.dossier-layout{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:26px;align-items:start;padding:24px 32px 6px}
+.dossier-panels{min-width:0}
+.dossier-panels .eyebrow{font-size:11px;letter-spacing:2.5px;margin-bottom:16px}
+.dossier-description{color:#c4cdd9;line-height:1.7;margin:0 0 22px}
+.dossier-features{display:grid;gap:12px}
+.dossier-feature{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-radius:12px;background:#0b1524;border:1px solid #ffffff12;transition:.2s}
+.dossier-feature:hover{border-color:#76cfff4d;transform:translateX(3px)}
+.feature-symbol{flex-shrink:0;width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(140deg,#12293f,#0b1a2c);border:1px solid #ffffff14;color:var(--accent)}
+.feature-symbol svg{width:22px;height:22px}
+.dossier-feature h3{font-size:14px;margin:0 0 3px}
+.dossier-feature p{color:#a9b3c1;font-size:13px;line-height:1.55;margin:0}
+.technical-entry{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-top:1px solid #ffffff10}
+.technical-entry:first-of-type{border-top:0}
+.technical-entry>span{font:400 22px/1 Impact,'Arial Narrow',sans-serif;color:#5f8fd6;flex-shrink:0;min-width:34px}
+.technical-entry h3{font-size:15px;margin:0 0 4px}
+.technical-entry p{color:#a9b3c1;font-size:13px;line-height:1.55;margin:0}
+.dossier-role-title{font-size:16px;margin:24px 0 12px}
+.dossier-role{background:#0b1524;border:1px solid #ffffff12;border-radius:10px;margin-bottom:10px;overflow:hidden}
+.dossier-role summary{cursor:pointer;padding:13px 16px;font-size:13.5px;font-weight:700;color:var(--accent);list-style:none}
+.dossier-role summary::-webkit-details-marker{display:none}
+.dossier-role summary::after{content:"+";float:right;color:#8cc5ff;transition:transform .2s}
+.dossier-role[open] summary::after{transform:rotate(45deg)}
+.dossier-role p{margin:0;padding:0 16px 14px;color:#a9b3c1;font-size:13px;line-height:1.55}
 
-.pd-desc{color:#c4cdd9;line-height:1.7;margin:0 0 22px}
-.pd-section-title{font-family:Impact,'Arial Narrow',sans-serif;letter-spacing:1px;text-transform:uppercase;
-  font-size:18px;margin:22px 0 14px;color:#eef3fb}
+.dossier-facts{background:#0a1322;border:1px solid #ffffff14;border-radius:13px;padding:18px;position:sticky;top:16px}
+.dossier-facts small{display:block;font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:var(--accent);margin:16px 0 7px}
+.dossier-facts small:first-child{margin-top:0}
+.dossier-facts p{margin:0;font-size:13.5px;color:#e7edf5}
+.dossier-facts .fact-status{display:inline-flex;align-items:center;gap:7px}
+.dossier-facts .fact-status::before{content:"";width:8px;height:8px;border-radius:50%;background:#9aa7c0}
+.dossier-facts .fact-status.en-cours::before{background:#ff9d5c;box-shadow:0 0 8px #ff9d5c}
+.dossier-facts .fact-status.termine::before{background:#35e08a;box-shadow:0 0 8px #35e08a}
+.dossier-tech{display:grid;gap:10px}
+.dossier-tech span{display:flex;align-items:center;gap:11px;font-size:13.5px;color:#e7edf5}
+.dossier-tech img{width:22px;height:22px;object-fit:contain}
+.dossier-tech svg{width:20px;height:20px;color:var(--accent)}
 
-/* Fonctionnalités avec icônes (maquette 1) */
-.pd-features{display:grid;gap:12px}
-.pd-feat{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-radius:12px;
-  background:#0b1524;border:1px solid #ffffff12;transition:.2s}
-.pd-feat:hover{border-color:#83d9f04d;transform:translateX(3px)}
-.pd-feat-ic{flex-shrink:0;width:42px;height:42px;border-radius:11px;display:grid;place-items:center;
-  background:linear-gradient(140deg,#12293f,#0b1a2c);border:1px solid #ffffff14;color:var(--accent)}
-.pd-feat-ic svg{width:22px;height:22px}
-.pd-feat strong{display:block;font-size:14px;margin-bottom:3px}
-.pd-feat span{color:#a9b3c1;font-size:13px;line-height:1.55}
-
-.pd-challenges{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.pd-challenges li{padding:12px 16px;border-radius:10px;background:#0a1220;border-left:3px solid #83d9f077}
-.pd-challenges strong{display:block;font-size:13.5px;margin-bottom:2px}
-.pd-challenges span{color:#a9b3c1;font-size:12.5px}
-
-.pd-roles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.pd-role{padding:14px 16px;border-radius:11px;background:#0b1524;border:1px solid #ffffff12}
-.pd-role strong{display:block;font-size:13.5px;margin-bottom:3px;color:var(--accent)}
-.pd-role span{color:#a9b3c1;font-size:12.5px;line-height:1.5}
-
-/* Rail de métadonnées (maquette 1) */
-.pd-rail{display:flex;flex-direction:column;gap:14px;position:sticky;top:0}
-.pd-rail-card{background:#0a1322;border:1px solid #ffffff14;border-radius:13px;padding:16px 18px}
-.pd-rail-card h4{margin:0 0 12px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8fa0b4;font-weight:700}
-.pd-tech{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.pd-tech li{display:flex;align-items:center;gap:11px;font-size:13.5px}
-.pd-tech img{width:22px;height:22px;object-fit:contain}
-.pd-tech-ph{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;font-size:11px;font-weight:700;
-  color:#04122b;background:linear-gradient(135deg,var(--accent),#5fb6d8)}
-.pd-meta{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.pd-meta>div{display:flex;flex-direction:column;gap:3px}
-.pd-meta small{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent)}
-.pd-meta span{font-size:13.5px;color:#e7edf5}
-.pd-dot{display:inline-flex;align-items:center;gap:7px}
-.pd-dot::before{content:"";width:8px;height:8px;border-radius:50%;background:#9aa7c0}
-.pd-dot.en-cours::before{background:#ff9d5c;box-shadow:0 0 8px #ff9d5c}
-.pd-dot.termine::before{background:#35e08a;box-shadow:0 0 8px #35e08a}
-
-.pd-github{display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;border-radius:12px;
-  font-weight:700;letter-spacing:1px;font-size:13px;text-transform:uppercase;color:#04122b;
-  background:linear-gradient(135deg,#83d9f0,#4aa8e6);box-shadow:0 8px 24px #4aa8e64d;transition:.2s}
-.pd-github:hover{transform:translateY(-2px);box-shadow:0 10px 30px #4aa8e666}
-.pd-github .gh{display:none}
-.pd-back{background:transparent;border:1px solid #ffffff1f;border-radius:11px;min-height:46px;color:#c4cdd9;
-  font-size:12.5px;letter-spacing:.5px}
-.pd-back:hover{border-color:var(--accent);color:var(--accent)}
-
-.pd-foot{display:flex;justify-content:space-between;align-items:center;margin-top:22px;padding-top:16px;
-  border-top:1px solid #ffffff12;font-family:'Courier New',monospace;font-size:11px;letter-spacing:1px;color:#67788c}
+.dossier-footer{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:18px 32px 28px;margin-top:8px;border-top:1px solid #ffffff12}
+.dossier-footer>span{font-family:'Courier New',monospace;font-size:11px;letter-spacing:1px;color:#67788c;margin-right:auto}
+.dossier-footer .btn{border-radius:10px}
 
 @media (max-width:900px){
-  .pd{padding:24px 18px 18px}
-  .pd-grid{grid-template-columns:1fr;gap:20px}
-  .pd-rail{position:static}
-  .pd-badge{margin-left:0}
+  .dossier-header,.dossier-media,.dossier-tabs,.dossier-layout,.dossier-footer{padding-left:20px;padding-right:20px}
+  .dossier-layout{grid-template-columns:1fr;gap:20px}
+  .dossier-facts{position:static}
+  .dossier-status{margin-left:0}
 }
 @media (max-width:520px){
-  .pd-roles{grid-template-columns:1fr}
-  .pd-meta{grid-template-columns:1fr 1fr}
-  .pd-thumb{width:78px;height:48px}
+  .dossier-thumbnails button{width:80px;height:50px}
+  .dossier-header{flex-wrap:wrap}
+}
+
+/* ==========================================================================
+   Parcours — carte de formation (frise), mise en pratique, prochaine mission.
+   ========================================================================== */
+.journey-intro{margin-bottom:8px}
+.learning-card{margin:26px 0 34px;padding:26px;border-radius:12px;background:linear-gradient(120deg,#0d1c2bef,#070c13f5);border:1px solid #6b99c944;border-left:3px solid var(--accent)}
+.learning-heading{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.learning-symbol{flex:0 0 44px;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,#12293f,#0b1a2c);border:1px solid #ffffff14;color:var(--accent)}
+.learning-symbol svg{width:24px;height:24px}
+.learning-heading .eyebrow{font-size:11px;margin-bottom:8px}
+.learning-heading h2{font-size:28px;margin:0 0 6px}
+.learning-heading>div>p{color:#bfccd8;margin:0;font-size:14px}
+.learning-current{margin-left:auto;flex-shrink:0;font-size:11px;font-weight:700;letter-spacing:1px;padding:6px 13px;border-radius:20px;background:#76cfff1f;border:1px solid #76cfff55;color:#bfe6ff}
+.learning-years{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.learning-years li{position:relative;padding:16px;border-radius:10px;background:#070e17f2;border:1px solid #6e8dab33}
+.learning-years li[aria-current=step]{border-color:var(--accent);box-shadow:0 0 0 1px #76cfff44}
+.learning-years li>span{font:400 15px/1 Impact,'Arial Narrow',sans-serif;color:#5f8fd6}
+.learning-years li strong{display:block;margin:8px 0 3px;font-size:15px}
+.learning-years li small{color:#99a9bb;font-size:12px}
+.learning-domains{margin-top:18px}
+.learning-domains .tags{margin:0}
+.journey-section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:0 0 6px;flex-wrap:wrap}
+.journey-section-heading h2{font-size:26px;margin:6px 0 0}
+.journey-section-heading .eyebrow{margin:0}
+.journey-count{font-size:11px;font-weight:700;letter-spacing:1.5px;color:#8fa0b4;white-space:nowrap}
+.next-mission{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin:34px 0 0;padding:26px;border-radius:12px;background:linear-gradient(120deg,#0d1c2bef,#070c13f5);border:1px solid #6b99c944}
+.next-mission-icon{flex:0 0 44px;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,#12293f,#0b1a2c);border:1px solid #ffffff14;color:var(--accent)}
+.next-mission-icon svg{width:24px;height:24px}
+.next-mission>div{flex:1;min-width:220px}
+.next-mission .eyebrow{margin-bottom:6px}
+.next-mission h2{font-size:24px;margin:0 0 8px}
+.next-mission p{color:#bfccd8;margin:0;font-size:14px}
+.next-mission p strong{color:#e7f0fa}
+.next-mission .btn{border-radius:6px}
+
+/* Téléphone — étapes de parcours */
+.phone-journey-step{padding:12px 0;border-bottom:1px solid #ffffff14}
+.phone-journey-step small{display:block;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+.phone-journey-step strong{display:block;font-size:14px}
+.phone-journey-step span{display:block;font-size:12px;color:#b7c5d6;margin-top:2px}
+
+@media (max-width:767px){
+  .learning-card,.next-mission{padding:18px}
+  .learning-heading{gap:14px}
+  .learning-symbol,.next-mission-icon{flex-basis:34px;width:34px;height:34px}
+  .learning-years{grid-template-columns:1fr}
+  .learning-heading h2{font-size:24px}
 }
 
 /* Sélecteur de langue */
