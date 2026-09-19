@@ -2,6 +2,7 @@
 window.I18N = {
   en: {
     langName: 'EN', switchTo: 'FR', htmlLang: 'en',
+    hud: { online: 'PLAYER ONLINE', level: 'DEVELOPER LEVEL 03', degree: 'COMPUTER SCIENCE · YEAR 3', progress: 'EDUCATION IN PROGRESS', journey: 'Explore my journey, third year of Computer Science', previous: 'Previous screenshot', next: 'Next screenshot' },
     settings: 'Settings', menu: 'Menu', skip: 'Skip to content', degree: 'COMPUTER SCIENCE',
     developerMode: 'DEVELOPER MODE', tagline: 'DEV · BUILD · PROGRESS',
     footerNav: 'Navigate', footerBack: 'Back', keysRange: '1 to 7', keyEsc: 'Esc',
@@ -73,6 +74,7 @@ window.I18N = {
   },
   fr: {
     langName: 'FR', switchTo: 'EN', htmlLang: 'fr',
+    hud: { online: 'PLAYER ONLINE', level: 'DEVELOPER LEVEL 03', degree: 'BUT INFORMATIQUE · 3ᵉ ANNÉE', progress: 'FORMATION EN COURS', journey: 'Voir mon parcours, troisième année de BUT', previous: 'Capture précédente', next: 'Capture suivante' },
     settings: 'Paramètres', menu: 'Menu', skip: 'Aller au contenu', degree: 'BUT INFORMATIQUE',
     developerMode: 'DEVELOPER MODE', tagline: 'DEV · BUILD · PROGRESS',
     footerNav: 'Naviguer', footerBack: 'Retour', keysRange: '1 à 7', keyEsc: 'Échap',

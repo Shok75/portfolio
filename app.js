@@ -135,7 +135,7 @@ function openProject(id) {
   const n = String(data.projects.indexOf(p) + 1).padStart(2, '0'), imgs = p.images || [];
   const [f0, l0] = imgs.length ? imgs[0] : ['', ''];
   const header = '<header class="dossier-header"><div><div class="eyebrow">' + esc(D.eyebrow) + ' / ' + n + '</div><h2 id="dossier-title">' + esc(tf(p.name)) + '</h2><p>' + esc(ctx) + (p.year ? ' <span>·</span> ' + esc(p.year) : '') + '</p></div><span class="dossier-status ' + cls + '">' + esc(T.status[p.state]) + '</span></header>';
-  const media = imgs.length ? '<section class="dossier-media" aria-label="' + esc(D.capturesTitle) + '"><div class="dossier-stage"><img id="dossier-image" src="assets/' + esc(f0) + '.webp" alt="' + esc(tf(l0)) + '"><div class="dossier-image-shade"></div><span class="dossier-screen-label">' + esc(D.onField) + '</span><div class="dossier-caption"><span id="dossier-caption">' + esc(tf(l0)) + '</span><span id="dossier-count" aria-live="polite">1 / ' + imgs.length + '</span></div>' + (imgs.length > 1 ? '<button class="dossier-arrow previous" data-dossier-step="-1" aria-label="◄">‹</button><button class="dossier-arrow next" data-dossier-step="1" aria-label="►">›</button>' : '') + '</div>' + (imgs.length > 1 ? '<div class="dossier-thumbnails">' + imgs.map(([file, label], i) => '<button data-dossier-image="' + i + '" aria-label="' + esc(tf(label)) + '" aria-pressed="' + (i === 0) + '"><img src="assets/' + esc(file) + '.webp" alt="" loading="lazy"><span>' + String(i + 1).padStart(2, '0') + '</span></button>').join('') + '</div>' : '') + '</section>' : '';
+  const media = imgs.length ? '<section class="dossier-media" aria-label="' + esc(D.capturesTitle) + '"><div class="dossier-stage"><img id="dossier-image" src="assets/' + esc(f0) + '.webp" alt="' + esc(tf(l0)) + '"><div class="dossier-image-shade"></div><span class="dossier-screen-label">' + esc(D.onField) + '</span><div class="dossier-caption"><span id="dossier-caption">' + esc(tf(l0)) + '</span><span id="dossier-count" aria-live="polite">1 / ' + imgs.length + '</span></div>' + (imgs.length > 1 ? '<button class="dossier-arrow previous" data-dossier-step="-1" aria-label="' + esc(T.hud.previous) + '">‹</button><button class="dossier-arrow next" data-dossier-step="1" aria-label="' + esc(T.hud.next) + '">›</button>' : '') + '</div>' + (imgs.length > 1 ? '<div class="dossier-thumbnails">' + imgs.map(([file, label], i) => '<button data-dossier-image="' + i + '" aria-label="' + esc(tf(label)) + '" aria-pressed="' + (i === 0) + '"><img src="assets/' + esc(file) + '.webp" alt="" loading="lazy"><span>' + String(i + 1).padStart(2, '0') + '</span></button>').join('') + '</div>' : '') + '</section>' : '';
   const tabDefs = [['overview', D.tabOverview], ['technical', D.tabTechnical]];
   if (imgs.length) tabDefs.push(['gallery', D.tabGallery]);
   const tabs = '<div class="dossier-tabs" role="tablist" aria-label="' + esc(tf(p.name)) + '">' + tabDefs.map(([key, label], i) => '<button id="dossier-tab-' + key + '" role="tab" aria-selected="' + (i === 0) + '" aria-controls="dossier-panel-' + key + '" tabindex="' + (i === 0 ? 0 : -1) + '" data-dossier-tab="' + key + '">' + esc(label) + '</button>').join('') + '</div>';
@@ -188,7 +188,6 @@ function buildSettings() {
 function applyChrome() {
   document.documentElement.lang = T.htmlLang;
   $('.skip').textContent = T.skip;
-  $('#settings').innerHTML = '⚙ <span>' + esc(T.settings) + '</span>';
   $('#lang-toggle').textContent = T.switchTo;
   $('#lang-toggle').setAttribute('aria-label', T.switchTo);
   $('.hamburger').firstChild ? $('.hamburger').childNodes[0].textContent = T.menu + ' ☰' : null;
@@ -196,7 +195,14 @@ function applyChrome() {
   $('.map-caption').textContent = T.map.caption;
   $('.sidebar-motto').innerHTML = T.map.motto;
   $('.footer-hint').innerHTML = '<kbd>' + esc(T.keysRange) + '</kbd> ' + esc(T.footerNav) + ' <kbd>' + esc(T.keyEsc) + '</kbd> ' + esc(T.footerBack);
-  const deg = document.querySelector('.hud-bottom small'); if (deg) deg.textContent = T.degree;
+  const H = T.hud;
+  document.querySelector('.hud-online').innerHTML = '<i></i>' + esc(H.online);
+  document.querySelector('.hud-player').setAttribute('aria-label', H.journey);
+  document.querySelector('.hud-player-info>strong').textContent = H.level;
+  document.querySelector('.hud-player-info>small').textContent = H.degree;
+  document.querySelector('.hud-years>span').textContent = H.progress;
+  $('#settings').setAttribute('aria-label', T.settings);
+  $('#settings').setAttribute('title', T.settings);
   document.querySelectorAll('.map-legend a').forEach(a => { const key = a.getAttribute('href').slice(1); const span = a.querySelector('span'); if (span && T.nav[key]) span.textContent = T.nav[key]; });
 }
 
