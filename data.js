@@ -20,12 +20,12 @@ window.portfolio = {
     period: '2024 — 2027',
     title: { fr: 'BUT Informatique', en: 'BSc in Computer Science (BUT)' },
     description: {
-      fr: 'Parcours Réalisation d’applications. Développement web et logiciel, bases de données et algorithmique.',
-      en: 'Application Development track. Web & software development, databases and algorithms.'
+      fr: 'Parcours Réalisation d’applications : conception, développement et validation. Développement web et logiciel, bases de données et travail en équipe (SAÉ).',
+      en: 'Application Development track: design, development and validation. Web & software development, databases and project-based teamwork (SAÉ).'
     },
     tags: {
-      fr: ['Développement', 'Bases de données', 'Travail en équipe'],
-      en: ['Development', 'Databases', 'Teamwork']
+      fr: ['Conception & développement', 'Tests & validation', 'Gestion de projet'],
+      en: ['Design & development', 'Testing & validation', 'Project management']
     }
   },
   projects: [
