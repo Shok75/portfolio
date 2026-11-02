@@ -45,7 +45,7 @@ window.I18N = {
       eduTag: 'EDUCATION', currentYear: '3rd YEAR', track: 'Application Development',
       years: [['2024 / 2025', 'First year'], ['2025 / 2026', 'Second year'], ['2026 / 2027', 'Third year · in progress']],
       domains: ['Design & development', 'Software architecture (MVC)', 'Testing & validation', 'Databases', 'Teamwork & project management'],
-      practiceEyebrow: 'HANDS-ON', practiceTitle: 'Build to learn.', practiceCount: 'ACADEMIC PROJECTS',
+      practiceEyebrow: 'HANDS-ON', practiceTitle: 'Build to learn.', practiceCount: 'PROJECTS',
       nextEyebrow: 'NEXT MISSION', nextTitle: 'On to real-world experience.', nextText: 'I’m looking for an internship of <strong>4 months or more, starting in March</strong>.', nextCta: 'LET’S TALK ↗' },
     contact: { index: '05 / NEXT MISSION', h1: 'Let’s talk.', intro: 'A project, an internship opportunity or simply a question? Leave me a message.',
       formSmall: 'NEW MESSAGE', formTitle: 'Let’s talk about your project.',
@@ -64,12 +64,12 @@ window.I18N = {
       technologies: 'Technologies', type: 'Type', year: 'Year', status: 'Status', foot: '// Build better worlds',
       tabOverview: 'Overview', tabTechnical: 'Technical', tabGallery: 'Gallery', onField: 'IN THE FIELD',
       techChoices: 'TECHNICAL CHOICES & CHALLENGES', capturesTitle: 'PROJECT SCREENSHOTS', footer: 'FROM CODE TO SHIPPING' },
-    toastStart: 'Two missions available in the project log.',
+    toastStart: 'Four missions available in the project log.',
     phoneApps: { profil: 'Profile', projets: 'Projects', competences: 'Skills', parcours: 'Journey', galerie: 'Gallery', contact: 'Contact' },
     phoneViews: { myProjects: 'My projects', myProfile: 'My profile', profileLine: 'Computer Science undergraduate<br>Application Development<br>France',
       internship: 'Internship of 4+ months from March', fullProfile: 'View full profile →', techs: 'Technologies',
       myJourney: 'My journey', journeyLine: 'Computer Science (BUT)<br>2024 — 2027', discoverJourney: 'Explore the journey →',
-      journeySteps: [['2024 — 2027', 'Computer Science (BUT)', '3rd year · Application Development'], ['ACADEMIC PROJECTS', 'Demon Realm · AssoManager', 'From a Java game to a web app'], ['NEXT STEP', 'Internship of 4+ months', 'Starting in March']],
+      journeySteps: [['2024 — 2027', 'Computer Science (BUT)', '3rd year · Application Development'], ['ACADEMIC PROJECTS', 'Demon Realm · AssoManager · HEIST', 'From a Java game to real-time web apps'], ['NEXT STEP', 'Internship of 4+ months', 'Starting in March']],
       gallery: 'Gallery', contact: 'Contact', screens: 'Screenshots →' }
   },
   fr: {
@@ -117,7 +117,7 @@ window.I18N = {
       eduTag: 'FORMATION', currentYear: '3ᵉ ANNÉE', track: 'Réalisation d’applications',
       years: [['2024 / 2025', 'Première année'], ['2025 / 2026', 'Deuxième année'], ['2026 / 2027', 'Troisième année · en cours']],
       domains: ['Conception & développement', 'Architecture logicielle (MVC)', 'Tests & validation', 'Bases de données', 'Travail en équipe & gestion de projet'],
-      practiceEyebrow: 'MISE EN PRATIQUE', practiceTitle: 'Construire pour apprendre.', practiceCount: 'PROJETS ACADÉMIQUES',
+      practiceEyebrow: 'MISE EN PRATIQUE', practiceTitle: 'Construire pour apprendre.', practiceCount: 'PROJETS',
       nextEyebrow: 'PROCHAINE MISSION', nextTitle: 'Passer à l’expérience terrain.', nextText: 'Je recherche un stage de <strong>4 mois ou plus à partir de mars</strong>.', nextCta: 'ÉCHANGEONS ↗' },
     contact: { index: '05 / PROCHAINE MISSION', h1: 'On en parle ?', intro: 'Un projet, une opportunité de stage ou simplement une question ? Laissez-moi un message.',
       formSmall: 'NOUVEAU MESSAGE', formTitle: 'Parlons de votre projet.',
@@ -136,12 +136,12 @@ window.I18N = {
       technologies: 'Technologies', type: 'Type', year: 'Année', status: 'Statut', foot: '// Build better worlds',
       tabOverview: 'Aperçu', tabTechnical: 'Technique', tabGallery: 'Galerie', onField: 'SUR LE TERRAIN',
       techChoices: 'CHOIX & DÉFIS TECHNIQUES', capturesTitle: 'CAPTURES DU PROJET', footer: 'DU CODE À LA RÉALISATION' },
-    toastStart: 'Deux missions disponibles dans le journal des projets.',
+    toastStart: 'Quatre missions disponibles dans le journal des projets.',
     phoneApps: { profil: 'Profil', projets: 'Projets', competences: 'Compétences', parcours: 'Parcours', galerie: 'Galerie', contact: 'Contact' },
     phoneViews: { myProjects: 'Mes projets', myProfile: 'Mon profil', profileLine: 'Étudiant en BUT Informatique<br>Réalisation d’applications<br>France',
       internship: 'Stage de 4 mois ou plus à partir de mars', fullProfile: 'Voir le profil complet →', techs: 'Technologies',
       myJourney: 'Mon parcours', journeyLine: 'BUT Informatique<br>2024 — 2027', discoverJourney: 'Découvrir le parcours →',
-      journeySteps: [['2024 — 2027', 'BUT Informatique', '3ᵉ année · Réalisation d’applications'], ['PROJETS ACADÉMIQUES', 'Demon Realm · AssoManager', 'Du jeu Java à l’application web'], ['PROCHAINE ÉTAPE', 'Stage de 4 mois ou plus', 'À partir de mars']],
+      journeySteps: [['2024 — 2027', 'BUT Informatique', '3ᵉ année · Réalisation d’applications'], ['PROJETS ACADÉMIQUES', 'Demon Realm · AssoManager · HEIST', 'Du jeu Java aux applis web temps réel'], ['PROCHAINE ÉTAPE', 'Stage de 4 mois ou plus', 'À partir de mars']],
       gallery: 'Galerie', contact: 'Contact', screens: 'Captures →' }
   }
 };

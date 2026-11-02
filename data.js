@@ -95,20 +95,70 @@ window.portfolio = {
       ]
     },
     {
-      id: 'plateforme-tournois',
-      name: { fr: 'Plateforme de tournois', en: 'Tournament platform' },
+      id: 'heist',
+      name: 'HEIST',
       context: 'academique',
-      state: 'upcoming',
-      year: '',
+      state: 'in-progress',
+      year: '2026',
       github: '',
-      tech: [{ fr: 'À compléter', en: 'To be added' }],
+      tech: ['TypeScript', 'React', 'NestJS', 'PostgreSQL', 'Prisma', 'Socket.IO', 'Git'],
       description: {
-        fr: 'Plateforme de gestion et de suivi de tournois. (Détails à compléter : technologies, fonctionnalités, statut.)',
-        en: 'A platform to manage and track tournaments. (Details to be added: technologies, features, status.)'
+        fr: 'Plateforme de tournois esport en équipes pour une association étudiante, réalisée en binôme. API REST NestJS temps réel et interface React mobile first.',
+        en: 'Team-based esports tournament platform for a student association, built as a pair. Real-time NestJS REST API and a mobile-first React interface.'
       },
-      features: [],
-      challenges: [],
-      images: []
+      features: [
+        [{ fr: 'Brackets automatiques', en: 'Automatic brackets' }, { fr: 'Génération du tableau à élimination directe et saisie des résultats match par match.', en: 'Single-elimination bracket generation and match-by-match result entry.' }],
+        [{ fr: 'Temps réel', en: 'Real time' }, { fr: 'Scores, brackets et chat d’équipe mis à jour sans recharger la page (Socket.IO).', en: 'Scores, brackets and team chat update without reloading the page (Socket.IO).' }],
+        [{ fr: 'Équipes & capitaines', en: 'Teams & captains' }, { fr: 'Création d’équipe, demandes d’adhésion, gestion des membres et chat privé.', en: 'Team creation, join requests, member management and private chat.' }],
+        [{ fr: 'Panel d’administration', en: 'Admin panel' }, { fr: 'Cycle de vie des tournois, catalogue de jeux (IGDB) et modération.', en: 'Tournament lifecycle, game catalogue (IGDB) and moderation.' }]
+      ],
+      challenges: [
+        [{ fr: 'Droits d’accès', en: 'Access control' }, { fr: 'Rôles visiteur / joueur / capitaine / admin, chaque règle couverte par un test de refus (e2e).', en: 'Visitor / player / captain / admin roles, each rule covered by a refusal test (e2e).' }],
+        [{ fr: 'Front indépendant du back', en: 'Backend-independent frontend' }, { fr: 'Couche d’accès unique avec une implémentation simulée (mocks) et une implémentation HTTP.', en: 'Single data-access layer with a mocked implementation and an HTTP one.' }],
+        [{ fr: 'Qualité & CI', en: 'Quality & CI' }, { fr: 'Tests Jest et Vitest, intégration continue GitHub Actions, fiches de décision et audit de sécurité.', en: 'Jest and Vitest tests, GitHub Actions CI, decision records and a security audit.' }]
+      ],
+      roles: [
+        [{ fr: 'Administrateur', en: 'Administrator' }, { fr: 'Crée et pilote les tournois, saisit les résultats, gère le catalogue de jeux.', en: 'Creates and runs tournaments, enters results, manages the game catalogue.' }],
+        [{ fr: 'Capitaine', en: 'Captain' }, { fr: 'Constitue son équipe, accepte les demandes et l’inscrit aux tournois.', en: 'Builds the team, accepts requests and registers it for tournaments.' }],
+        [{ fr: 'Joueur', en: 'Player' }, { fr: 'Rejoint une équipe, échange dans le chat et suit ses matchs.', en: 'Joins a team, chats with teammates and follows their matches.' }],
+        [{ fr: 'Visiteur', en: 'Visitor' }, { fr: 'Consulte les tournois, les brackets et le classement en direct.', en: 'Browses tournaments, brackets and live rankings.' }]
+      ],
+      images: [
+        ['heist-accueil', { fr: 'Accueil', en: 'Home' }],
+        ['heist-bracket', { fr: 'Bracket en direct', en: 'Live bracket' }],
+        ['heist-admin', { fr: 'Panel d’administration', en: 'Admin panel' }],
+        ['heist-espace', { fr: 'Espace joueur', en: 'Player dashboard' }]
+      ]
+    },
+    {
+      id: 'app-bourse',
+      name: { fr: 'Suivi Bourse', en: 'Stock Tracker' },
+      context: 'personnel',
+      state: 'in-progress',
+      year: '2026',
+      github: '',
+      tech: ['TypeScript', 'Next.js', 'React', 'SQLite', 'Tailwind CSS', 'Java'],
+      description: {
+        fr: 'Application de suivi de portefeuille boursier personnel (sans achat/vente ni conseil) : comptes multiples, mouvements, cours de marché et graphiques. Fonctionne hors ligne.',
+        en: 'Personal stock portfolio tracker (no trading, no advice): multiple accounts, transactions, market quotes and charts. Works offline.'
+      },
+      features: [
+        [{ fr: 'Tableau de bord', en: 'Dashboard' }, { fr: 'Patrimoine, apports, plus-values et répartition par secteur, pays ou compte, filtrables par période.', en: 'Net worth, contributions, gains and allocation by sector, country or account, filterable by period.' }],
+        [{ fr: 'Cours de marché', en: 'Market quotes' }, { fr: 'Synchronisation Yahoo Finance avec repli automatique et derniers cours mémorisés hors ligne.', en: 'Yahoo Finance sync with automatic fallback and last quotes kept offline.' }],
+        [{ fr: 'Mouvements journalisés', en: 'Logged transactions' }, { fr: 'Achats, ventes, versements, dividendes ; modification et suppression douce tracées.', en: 'Buys, sells, deposits, dividends; edits and soft deletes are audited.' }],
+        [{ fr: 'Statistiques & graphiques', en: 'Statistics & charts' }, { fr: 'Évolution des titres, dividendes mensuels et analyse pédagogique des données.', en: 'Holdings history, monthly dividends and an educational data analysis.' }]
+      ],
+      challenges: [
+        [{ fr: 'Persistance locale fiable', en: 'Reliable local storage' }, { fr: 'Base SQLite intégrée, journal d’audit et sauvegarde quotidienne automatique.', en: 'Embedded SQLite database, audit log and automatic daily backup.' }],
+        [{ fr: 'Mode hors ligne', en: 'Offline mode' }, { fr: 'Cours mémorisés et indication de la dernière synchronisation quand le marché est injoignable.', en: 'Stored quotes and last-sync notice when the market is unreachable.' }],
+        [{ fr: 'Lancement en un clic', en: 'One-click launch' }, { fr: 'Lanceur Windows/macOS/Linux qui compile et démarre l’application, plus un compagnon Android.', en: 'Windows/macOS/Linux launcher that builds and starts the app, plus an Android companion.' }]
+      ],
+      images: [
+        ['bourse-dashboard', { fr: 'Tableau de bord', en: 'Dashboard' }],
+        ['bourse-actifs', { fr: 'Actifs suivis', en: 'Tracked assets' }],
+        ['bourse-actif', { fr: 'Fiche d’un actif', en: 'Asset detail' }],
+        ['bourse-mouvements', { fr: 'Mouvements', en: 'Transactions' }]
+      ]
     }
   ]
 };
